@@ -1,0 +1,67 @@
+<h3 align="center" ng-style="{'color': 'rgba(255, 0, 0, 1)'}">{{tokenUser.errorMessage}}</h3>
+<h3 align="center" ng-style="{'color': 'rgba(255, 0, 0, 1)'}">{{tokenUser.successMessage}}</h3>
+<div flex layout="row" layout-md="column" layout-sm="column" layout-align="center center"> 
+<form name="tokenGenForm" ng-submit="submitTokenGenForm()" ng-show="true"	ng-cloak>
+	<div class="table-responsive-vertical shadow-z-1" layout-align=""> 
+			<md-toolbar class="md-theme-light" >
+			<h4 class="md-toolbar-tools" layout="row" layout-align="center center">
+				<span>Please enter Email Id, Token Type to generate Token</span>
+			</h4>
+			</md-toolbar> 
+			
+ 
+  <table id="table" class="table table-hover table-mc-light-blue">
+      <tbody>
+        
+		<tr>
+          <td  style="text-align: center;" colspan="2" data-title="" layout-align="center center"> 
+		  
+		  	<div flex>
+				<md-input-container> <label>Email
+					Address</label> <input type="email" name="email" id="email"
+					ng-model="token.email" ng-required="true"
+					ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/">
+				<div ng-messages="tokenGenForm.email.$error.required">
+					<div ng-message="required">Email address is required.</div>
+					<span ng-show="tokenGenForm.email.$error.emailAddress">This is not a
+						valid email.</span>
+				</div>
+			</md-input-container>
+		  </td>
+        </tr>
+		
+        <tr>
+          <td style="text-align: center;" colspan="2" data-title="" layout-align="center center">
+		    <div flex>
+				<md-input-container class="md-block" flex-gt-sm>
+		        <label>Token Type</label>
+		        <md-select name="tokenType" ng-model="token.tokenType" ng-required="true">
+      							<md-option value="ASSOCIATE">Associate</md-option>
+							<md-option value="ADMIN">Admin</md-option>
+   							 </md-select>
+   							 <div ng-messages="tokenGenForm.tokenType.$error">
+					<div ng-message="required">Token Type is required.</div>
+				 </div>
+		        </md-input-container> 
+			</div>
+		  </td>
+        </tr>
+        <tr>
+          <td style="text-align: center;" colspan="2" data-title="" layout-align="center center">
+		  <div flex>
+				<md-button type="submit" class="md-raised md-button md-ink-ripple"
+					ng-disabled="tokenGenForm.$invalid">GENERATE TOKEN</md-button>
+			</div>
+		  </td>
+        </tr>
+		
+		
+		
+      </tbody>
+    </table>
+</form>
+<div id="loaders" layout="row" layout-align="center center">
+    <md-progress-circular md-mode="indeterminate"  ng-show=loading></md-progress-circular>
+ </div>
+	</div>
+</div>

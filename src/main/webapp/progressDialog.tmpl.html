@@ -1,0 +1,204 @@
+<div class="table-responsive-vertical shadow-z-1" layout-align=""> 
+<div id="table-wrapper">
+<div id="table-scroll">
+
+  <table id="table" class="table table-hover table-mc-light-blue">
+      
+<tbody>
+<tr valign="center">
+		<td> 
+			<md-switch class="md-primary" ng-disabled="true" ng-model= "data.agreementTrackerStatus.agreement_terms_added">	</md-switch> 
+  		</td>
+  		<td>
+  			Created
+  		</td>
+  		<td>
+  			You have created a new Agreement & Agreement number has been <br>generated for further processing
+  		</td>
+</tr>
+<tr valign="center">
+		<td> 
+			<md-switch class="md-primary" ng-disabled="true" ng-model="data.agreementTrackerStatus.data_input_in_progress">	</md-switch> 
+	  	</td>
+	  	<td>
+	  		Data Input is in progress
+	  	</td>
+	  	<td>
+	  		You have started putting agreement data, Please go through all <br>different Tabs to submit the details. 
+	  	</td>
+</tr>
+ <tr valign="center">
+		<td> 
+			<md-switch class="md-primary" ng-disabled="true" ng-model="data.agreementTrackerStatus.agreement_all_req_data_added">	</md-switch> 
+  		</td>
+  		<td>
+  			Completed data input
+  		</td>
+  		<td>
+  			You have completed putting all the agreement details & confirm, Awaiting payment to be received 
+  		</td>
+ </tr>
+ <tr valign="center">
+		<td> 
+			<md-switch class="md-primary" ng-disabled="true" ng-model="data.agreementTrackerStatus.usr_pyment_done">	</md-switch> 
+  		</td>
+  		<td>
+  			Payment Received
+  		</td>
+  		<td>
+  			Team has received your Payment. A case manager would be <br>shortly assigned to review your agreement data.
+  		</td>
+ </tr>
+ <tr valign="center">
+		<td> 
+			<md-switch class="md-primary" ng-disabled="true" ng-model="data.agreementTrackerStatus.associate_assigned">	</md-switch> 
+  		</td>
+  		<td>
+  			A case manager has been assigned
+  		</td>
+  		<td>
+  			A case manager has been assigned to review your agreement data.Draft copy creation is in progress.
+  		</td>
+ </tr>
+ <tr valign="center">
+		<td> 
+			<md-switch class="md-primary" ng-disabled="true" ng-model="data.agreementTrackerStatus.usr_draft_generated">	</md-switch> 
+  		</td>
+  		<td>
+  			Draft copy has been generated 
+  		</td>
+  		<td>
+  			Draft copy has been generated, you will soon receive Agreement Draft copy.
+  		</td>
+ </tr>
+ <tr valign="center">
+		 <td> 
+			<md-switch class="md-primary" ng-disabled="true" ng-model="data.agreementTrackerStatus.usr_draft_sent_for_approval">	</md-switch> 
+		  </td>
+		  <td>
+		  	 Draft copy sent for Approval
+		  </td>
+		  <td>
+		  	Agreement draft copy has been generated & send to your registered mail, Awaiting for Approvals.   
+		  </td>
+</tr>
+<tr valign="center">
+		 <td> 
+			<md-switch class="md-primary" ng-disabled="true" ng-model="data.agreementTrackerStatus.draft_approved_by_owner">	</md-switch> 
+		  </td>
+		  <td>
+		  	 Draft copy Approved by owner
+		  </td>
+		  <td>
+		  	Agreement draft copy has been approved by owner , Awaiting for Appointments & Biomatric.   
+		  </td>
+</tr>
+
+<tr valign="center">
+		 <td> 
+			<md-switch class="md-primary" ng-disabled="true" ng-model="data.agreementTrackerStatus.draft_approved_by_tenent">	</md-switch> 
+		  </td>
+		  <td>
+		  	 Draft copy Approved by tenent
+		  </td>
+		  <td>
+		  	Agreement draft copy has been approved by tenent , Awaiting for Appointments & Biomatric.   
+		  </td>
+</tr>
+
+
+<tr valign="center">
+		 <td> 
+			<md-switch class="md-primary" ng-disabled="true" ng-model="data.agreementTrackerStatus.owner_biometric_in_progress">	</md-switch> 
+		  </td>
+		  <td>
+		  	 Biomatric process is in progress
+		  </td>
+		  <td>
+		  	Appointment has been taken & Biomatric process is in progress.   
+		  </td>
+</tr>
+<tr valign="center">
+		 <td> 
+			<md-switch class="md-primary" ng-disabled="true" ng-model="data.agreementTrackerStatus.biometric_done">	</md-switch> 
+		  </td>
+		  <td>
+		  	 Biomatric process Done
+		  </td>
+		  <td>
+		  	Biomatric process has been done, Awaiting for Chalan to be created.   
+		  </td>
+</tr>
+<tr valign="center">
+		 <td> 
+			<md-switch class="md-primary" ng-disabled="true" ng-model="data.agreementTrackerStatus.chalan_created">	</md-switch> 
+		  </td>
+		  <td>
+		  	 Chalan has been created
+		  </td>
+		  <td>
+		  	Chalan has been created, Draft copy submission to Gov is in progress.   
+		  </td>
+</tr>
+<tr valign="center">
+		 <td> 
+			<md-switch class="md-primary" ng-disabled="true" ng-model="data.agreementTrackerStatus.govt_draft_submitted">	</md-switch> 
+		  </td>
+		  <td>
+		  	 Draft copy submitted
+		  </td>
+		  <td>
+		  	Draft copy has been submitted to Gov, awating for Gov LNL approval.   
+		  </td>
+</tr>
+<tr valign="center">
+		 <td> 
+			<md-switch class="md-primary" ng-disabled="true" ng-model="data.agreementTrackerStatus.govt_lnl_approved">	</md-switch> 
+		  </td>
+		  <td>
+		  	 Gov LNL approved
+		  </td>
+		  <td>
+		  	Gov LNL has been approved, awating for Hard copy to be Dispatched.  
+		  </td>
+</tr>
+<tr valign="center">
+		 <td> 
+			<md-switch class="md-primary" ng-disabled="true" ng-model="data.agreementTrackerStatus.hard_copy_dispatched_in_progress">	</md-switch> 
+		  </td>
+		  <td>
+		  	 Hard copy Dispatch is in progress
+		  </td>
+		  <td>
+		  	Hard copy Dispatch is in progress, you will get the details soon.   
+		  </td>
+</tr>
+<tr valign="center">
+		 <td> 
+			<md-switch class="md-primary" ng-disabled="true" ng-model="data.agreementTrackerStatus.hard_copy_dispatched_to_user">	</md-switch> 
+		  </td>
+		  <td>
+		  	 Hard copy Dispatched
+		  </td>
+		  <td>
+		  	Hard copy has been Dispatch , Please check your email for details.   
+		  </td>
+</tr>
+<tr valign="center">
+		 <td> 
+			<md-switch class="md-primary" ng-disabled="true" ng-model="data.agreementTrackerStatus.completed">	</md-switch> 
+		  </td>
+		  <td>
+		  	 completed
+		  </td>
+		  <td>
+		  	completed.   
+		  </td>
+</tr>
+
+      </tbody>
+    </table>
+    
+</div>
+</div>	
+  </div> 

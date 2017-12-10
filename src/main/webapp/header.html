@@ -1,0 +1,55 @@
+<md-menu  id="menuBar" ng-controller="menuCtrl as ctrl">
+<div layout="row" layout-align="space-between start" ng-style="{'background': 'rgba(0, 0, 161, .8)'}">
+              <div>
+			   <a href="index.html "><h4 ng-style="{'color': 'rgba(255, 255, 255, 1)'}">Namami</h4></a>
+			   <md-divider ng-style="{'background': 'rgba(255, 108, 08, 0.8)'}"></md-divider>
+			  </div>
+                <div >
+                <!-- ng-show="isLoggedinUser" -->
+				  <button class="menu-icon"  id="open-button" ng-click="ctrl.openMenu($mdOpenMenu, $event)">
+                    <i class="mdi-navigation-menu"></i>
+                  </button>
+                </div>
+                
+  </div>            
+
+	 <md-menu-content width="4">
+        
+        <md-menu-item ng-show="isLoggedinUser">
+          <md-button>
+            <a href="dashboard">Dashboard</a>
+          </md-button>
+        </md-menu-item>
+        <md-menu-item ng-show="isLoggedinUser">
+          <md-button>
+            <a href="newagreement">Create New Agreement</a>
+          </md-button>
+        </md-menu-item ng-show="isLoggedinUser">
+        <md-menu-divider></md-menu-divider>
+        <md-menu-item>
+          <md-button ng-show="isLoggedinUser">
+            <a href="profile">Update Profile</a>
+          </md-button>
+        </md-menu-item>
+        <md-menu-item ng-show="isLoggedinUser">
+          <md-button >
+            <a href="calculator">Calculate Price</a>
+          </md-button>
+        </md-menu-item >
+		<md-menu-item ng-show="isLoggedinUser">
+          <md-button>
+            <a href="logout">Log Out</a>
+          </md-button>
+        </md-menu-item>
+        <md-menu-item ng-show="!isLoggedinUser">
+          <md-button>
+            <a href="login">Login</a>
+          </md-button>
+        </md-menu-item>
+        <md-menu-item ng-show="!isLoggedinUser">
+          <md-button>
+            <a href="register">Register</a>
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu> 

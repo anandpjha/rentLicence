@@ -1,0 +1,112 @@
+
+
+&nbsp;
+
+
+<div class="table-responsive-vertical shadow-z-1" style="width: 500px; margin: 0px auto; text-align: center;"> 
+<md-toolbar class="md-theme-light" >
+    <h2 class="md-toolbar-tools" layout="row" layout-align="center center">
+      <span>Profile Details</span>
+    </h2>
+  </md-toolbar>
+  
+<div>
+
+ 
+	<div layout="row" layout-align="center center">
+		
+
+	
+	<form name="updateUserProfileUserForm" ng-submit="submitupdateUserProfileUser()" ng-show="true"
+			ng-cloak>
+			
+			{{errorStatus}}
+			
+			{{messageText}}
+
+
+  
+		<div flex>
+          <label>Email Id:  </label>
+          <label>{{updateUserProfile.userEmail}}</label>
+         </div>
+        
+
+				
+				
+
+		  <div flex>
+          <md-input-container> <label>Name: </label></td>
+		  <input type="name" name="name" id="name" ng-model="updateUserProfile.name">
+		 </md-input-container>
+		  </div>
+         
+          
+        
+         <div flex>
+		 <md-input-container> <label>City: </label></td>
+		  <input type="city" name="city" id="city" ng-model="updateUserProfile.city">
+		</md-input-container>
+		  </div>
+          
+       
+         <div flex> 
+		 <md-input-container> <label>Mobile Number: </label></td>
+		  <input type="userMobile" name="userMobile" id="userMobile" ng-model="updateUserProfile.userMobile"
+					ng-required="true">
+		<div ng-messages="userMobile.$error">
+					<div ng-message="required">Password is required.</div>
+				</div>
+				</md-input-container>
+		  </div>
+          
+       
+          
+		  <div flex>
+				<md-input-container> <label>Current Password</label>
+				<input type="password" name="userPassword" id="userPassword" ng-model="updateUserProfile.password"
+					ng-required="true">
+				<div ng-messages="updateUserProfileForm.Password.$error">
+					<div ng-message="required">Password is required.</div>
+				</div>
+				</md-input-container>
+				
+			</div>
+
+        
+
+		
+          
+		  <div flex>
+				<md-input-container> <label>New Password</label>
+				<input type="password" name="newuserPassword" id="newuserPassword" ng-model="updateUserProfile.userNewPassword">
+				
+				</md-input-container>
+				
+			</div>
+
+        
+		
+		
+         <div flex>
+				<md-button type="submit" class="md-raised md-button md-ink-ripple"
+					ng-disabled="updateUserProfileForm.$invalid">UPDATE PROFILE</md-button>
+		</div>
+         
+          
+        
+        
+		</form>
+	
+	</div>     
+    
+	
+  </div>
+ 
+
+</div>
+
+<div id="loaders" layout="row" layout-align="center center">
+    <md-progress-circular md-mode="indeterminate"  ng-show=loading></md-progress-circular>
+ </div>
+ 

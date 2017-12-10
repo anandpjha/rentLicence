@@ -1,0 +1,107 @@
+<h3 align="center" ng-style="{'color': 'rgba(255, 0, 0, 1)'}">{{errorMessage}}</h3>
+<div flex layout="row" layout-md="column" layout-sm="column" layout-align="center center"> 
+<!-- <form name="proceedPaymentUserForm" ng-submit="submitproceedPayment()" ng-show="true"	ng-cloak> -->
+	<div class="table-responsive-vertical shadow-z-1" layout-align=""> 
+			<md-toolbar class="md-theme-light" >
+			<h4 class="md-toolbar-tools" layout="row" >
+				<span>Your Payment Details are as below</span>
+			</h4>
+			</md-toolbar> 
+ 
+  <table id="table" class="table table-hover table-mc-light-blue">
+      <tbody>
+        
+		<tr>
+          <td   colspan="2" data-title="" > 
+		    <div flex>
+				<label>Registration Fee:  </label>
+				<label>{{paymentDetails.registrationFee}}</label>
+			</div>
+		  </td>
+        </tr>
+        
+        <tr>
+          <td   colspan="2" data-title="" > 
+		    <div flex>
+				<label>Stamp Duty:  </label>
+				<label>{{paymentDetails.stampDuty}}</label>
+			</div>
+		  </td>
+        </tr>
+        
+        <tr>
+          <td   colspan="2" data-title="" > 
+		    <div flex>
+				<label>Government Authorization Fee:  </label>
+				<label>{{paymentDetails.governmentAuthorizationFee}}</label>
+			</div>
+		  </td>
+        </tr>
+        
+        <tr>
+          <td   colspan="2" data-title="" > 
+		    <div flex>
+				<label>ERegistration Fee:  </label>
+				<label>{{paymentDetails.eRegistrationFee}}</label>
+			</div>
+		  </td>
+        </tr>
+        
+        <tr>
+          <td   colspan="2" data-title="" > 
+		    <div flex>
+				<label>Single Visit Fee:  </label>
+				<label>{{paymentDetails.singlevisitFee}}</label>
+			</div>
+		  </td>
+        </tr>
+        
+        <tr>
+          <td   colspan="2" data-title="" > 
+		    <div flex>
+				<label>Other Charges:  </label>
+				<label>{{paymentDetails.otherCharges}}</label>
+			</div>
+		  </td>
+        </tr>
+        
+        <tr>
+          <td   colspan="2" data-title="" > 
+		    <div flex>
+				<label>Service Tax:  </label>
+				<label>{{paymentDetails.serviceTax}}</label>
+			</div>
+		  </td>
+        </tr>
+        
+        <tr>
+          <td   colspan="2" data-title="" > 
+		     <div flex>
+				<label>Total Registration Charges:  </label>
+				<label>{{paymentDetails.totalRegistrationCharges}}</label>
+			</div>
+			<!-- <div flex>
+				<md-input-container> <label>totalRegistrationCharges:: </label>
+					<input type="totalRegistrationCharges" name="totalRegistrationCharges" id="totalRegistrationCharges:" ng-model={{paymentDetails.totalRegistrationCharges}}>
+				</md-input-container>
+			</div> -->
+		  </td>
+        </tr>
+		
+		<tr>
+          <td  colspan="2" data-title="" layout-align="center center">
+			<div flex>
+				<md-button class="md-raised md-button md-ink-ripple"
+					ng-click="showConfirm($event)">PROCEED FOR PAYMENT</md-button>
+			</div>
+		</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+<!-- </form> -->
+<div id="loaders" layout="row" layout-align="center center">
+    <md-progress-circular md-mode="indeterminate"  ng-show=loading></md-progress-circular>
+ </div>
+	</div>
+</div>

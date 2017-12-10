@@ -1,0 +1,427 @@
+
+
+<h3 align="center">{{errorStatus}}<h3>
+
+<div flex layout="row" layout-md="column" layout-sm="column" ng-repeat="data in listdata" layout-align="center center"> 
+
+
+<div class="table-responsive-vertical shadow-z-1" layout-align=""> 
+<div id="table-wrapper">
+<div id="table-scroll">
+<md-toolbar class="md-theme-light" >
+    <h2 class="md-toolbar-tools" layout="row" layout-align="center center">
+      <span>Agreement Id# : {{data.agreementId}} Details</span>
+    </h2>
+  </md-toolbar>
+  
+
+  <!-- Table starts here -->
+  <table id="table" class="table table-hover table-mc-light-blue">
+      
+      <tbody>
+
+
+        <tr>
+          <td data-title="">    Unique No : </td>
+          <td ><a href="internal_newagreement/{{data.agreementId}}">     {{data.agreementId}}</a></td>
+          
+        </tr>
+	
+		<tr>
+          <td data-title="">Start Date: </td>
+          <!-- <td data-title="">{{ParseDate(data.agreementStartDate) | date : 'MMM dd, yyyy'}}</td> -->
+          <td data-title="">{{data.agreementStartDate | date: 'dd-MMM-yyyy'}}</td>
+          
+        </tr>
+		
+        <tr>
+          <td data-title="">Status: </td>
+          <td data-title="">{{data.agreementStatus}}</td>
+          
+        </tr>
+		<tr>
+		      
+          
+        </tr>
+        
+      </tbody>
+    </table>
+    
+			
+       
+   
+    
+	</div>
+	</div>
+  </div>
+  	
+ <div> &nbsp</div>
+<div class="table-responsive-vertical shadow-z-1" layout-align=""> 
+<div id="table-wrapper">
+<div id="table-scroll">
+<md-toolbar class="md-theme-light" >
+    <h2 class="md-toolbar-tools" layout="row" layout-align="center center">
+      <span> Agreement Id# : {{data.agreementId}} - Progress status</span>
+    </h2>
+  </md-toolbar>
+
+  <!-- Table starts here -->
+  <table id="table" class="table table-hover table-mc-light-blue">
+      
+<tbody>
+<tr valign="center">
+		<td> 
+			<md-switch class="md-primary" ng-disabled="true" ng-model="data.agreementTrackerStatus.agreement_terms_added">	</md-switch> 
+  		</td>
+  		<td>
+  			Created
+  		</td>
+  		<td>
+  			You have created a new Agreement & Agreement number has been <br>generated for further processing
+  		</td>
+</tr>
+<tr valign="center">
+		<td> 
+			<md-switch class="md-primary" ng-disabled="true" ng-model="data.agreementTrackerStatus.data_input_in_progress">	</md-switch> 
+	  	</td>
+	  	<td>
+	  		Data Input is in progress
+	  	</td>
+	  	<td>
+	  		You have started putting agreement data, Please go through all <br>different Tabs to submit the details. 
+	  	</td>
+</tr>
+ <tr valign="center">
+		<td> 
+			<md-switch class="md-primary" ng-disabled="true" ng-model="data.agreementTrackerStatus.agreement_all_req_data_added">	</md-switch> 
+  		</td>
+  		<td>
+  			Completed data input
+  		</td>
+  		<td>
+  			You have completed putting all the agreement details & confirm, Awaiting payment to be received 
+  		</td>
+ </tr>
+ <tr valign="center">
+		<td> 
+			<md-switch class="md-primary" ng-disabled="true" ng-model="data.agreementTrackerStatus.usr_pyment_done">	</md-switch> 
+  		</td>
+  		<td>
+  			Payment Received
+  		</td>
+  		<td>
+  			Team has received your Payment. A case manager would be <br>shortly assigned to review your agreement data.
+  		</td>
+ </tr>
+ <tr valign="center">
+		<td> 
+			<md-switch class="md-primary" ng-disabled="true" ng-model="data.agreementTrackerStatus.associate_assigned">	</md-switch> 
+  		</td>
+  		<td>
+  			A case manager has been assigned
+  		</td>
+  		<td>
+  			A case manager has been assigned to review your agreement data.Draft copy creation is in progress.
+  		</td>
+ </tr>
+ <tr valign="center">
+		<td> 
+			<md-switch class="md-primary" ng-disabled="true" ng-model="data.agreementTrackerStatus.usr_draft_generated">	</md-switch> 
+  		</td>
+  		<td>
+  			Draft copy has been generated 
+  		</td>
+  		<td>
+  			Draft copy has been generated, you will soon receive Agreement Draft copy.
+  		</td>
+ </tr>
+ <tr valign="center">
+		 <td> 
+			<md-switch class="md-primary" ng-disabled="true" ng-model="data.agreementTrackerStatus.usr_draft_sent_for_approval">	</md-switch> 
+		  </td>
+		  <td>
+		  	 Draft copy sent for Approval
+		  </td>
+		  <td>
+		  	Agreement draft copy has been generated & send to your registered mail, Awaiting for Approvals.   
+		  </td>
+</tr>
+<tr valign="center">
+		 <td> 
+			<md-switch class="md-primary" ng-disabled="true" ng-model="data.agreementTrackerStatus.draft_approved_by_owner">	</md-switch> 
+		  </td>
+		  <td>
+		  	 Draft copy Approved by owner
+		  </td>
+		  <td>
+		  	Agreement draft copy has been approved by owner , Awaiting for Appointments & Biomatric.   
+		  </td>
+</tr>
+
+<tr valign="center">
+		 <td> 
+			<md-switch class="md-primary" ng-disabled="true" ng-model="data.agreementTrackerStatus.draft_approved_by_tenent">	</md-switch> 
+		  </td>
+		  <td>
+		  	 Draft copy Approved by tenent
+		  </td>
+		  <td>
+		  	Agreement draft copy has been approved by tenent , Awaiting for Appointments & Biomatric.   
+		  </td>
+</tr>
+
+
+<tr valign="center">
+		 <td> 
+			<md-switch class="md-primary" ng-disabled="true" ng-model="data.agreementTrackerStatus.owner_biometric_in_progress">	</md-switch> 
+		  </td>
+		  <td>
+		  	 Biomatric process is in progress
+		  </td>
+		  <td>
+		  	Appointment has been taken & Biomatric process is in progress.   
+		  </td>
+</tr>
+<tr valign="center">
+		 <td> 
+			<md-switch class="md-primary" ng-disabled="true" ng-model="data.agreementTrackerStatus.biometric_done">	</md-switch> 
+		  </td>
+		  <td>
+		  	 Biomatric process Done
+		  </td>
+		  <td>
+		  	Biomatric process has been done, Awaiting for Chalan to be created.   
+		  </td>
+</tr>
+<tr valign="center">
+		 <td> 
+			<md-switch class="md-primary" ng-disabled="true" ng-model="data.agreementTrackerStatus.chalan_created">	</md-switch> 
+		  </td>
+		  <td>
+		  	 Chalan has been created
+		  </td>
+		  <td>
+		  	Chalan has been created, Draft copy submission to Gov is in progress.   
+		  </td>
+</tr>
+<tr valign="center">
+		 <td> 
+			<md-switch class="md-primary" ng-disabled="true" ng-model="data.agreementTrackerStatus.govt_draft_submitted">	</md-switch> 
+		  </td>
+		  <td>
+		  	 Draft copy submitted
+		  </td>
+		  <td>
+		  	Draft copy has been submitted to Gov, awating for Gov LNL approval.   
+		  </td>
+</tr>
+<tr valign="center">
+		 <td> 
+			<md-switch class="md-primary" ng-disabled="true" ng-model="data.agreementTrackerStatus.govt_lnl_approved">	</md-switch> 
+		  </td>
+		  <td>
+		  	 Gov LNL approved
+		  </td>
+		  <td>
+		  	Gov LNL has been approved, awating for Hard copy to be Dispatched.  
+		  </td>
+</tr>
+<tr valign="center">
+		 <td> 
+			<md-switch class="md-primary" ng-disabled="true" ng-model="data.agreementTrackerStatus.hard_copy_dispatched_in_progress">	</md-switch> 
+		  </td>
+		  <td>
+		  	 Hard copy Dispatch is in progress
+		  </td>
+		  <td>
+		  	Hard copy Dispatch is in progress, you will get the details soon.   
+		  </td>
+</tr>
+<tr valign="center">
+		 <td> 
+			<md-switch class="md-primary" ng-disabled="true" ng-model="data.agreementTrackerStatus.hard_copy_dispatched_to_user">	</md-switch> 
+		  </td>
+		  <td>
+		  	 Hard copy Dispatched
+		  </td>
+		  <td>
+		  	Hard copy has been Dispatch , Please check your email for details.   
+		  </td>
+</tr>
+<tr valign="center">
+		 <td> 
+			<md-switch class="md-primary" ng-disabled="true" ng-model="data.agreementTrackerStatus.completed">	</md-switch> 
+		  </td>
+		  <td>
+		  	 completed
+		  </td>
+		  <td>
+		  	completed.   
+		  </td>
+</tr>
+
+      </tbody>
+    </table>
+    
+</div>
+</div>	
+  </div>
+
+</div>
+
+<div flex layout="row" layout-md="column" layout-sm="column" layout-align="center center">
+
+
+<div class="table-responsive-vertical shadow-z-1" layout-align=""> 
+<div id="table-wrapper">
+<div id="table-scroll">
+<md-toolbar class="md-theme-light" >
+    		<h2 class="md-toolbar-tools" layout="row" layout-align="center center">
+      			<span>Update Agreement Status</span>
+    		</h2>
+</md-toolbar>
+<form name="updateStatusForm" ng-submit="submitUpdateAgreementStatus()" ng-show="true" ng-cloak>
+  
+
+  <!-- Table starts here -->
+  <table id="table" class="table table-hover table-mc-light-blue">
+      
+      <tbody>
+
+
+        <tr>
+          <td data-title="" colspan="2">   	
+          {{UpdateAgreementStatus_successMessage}}
+       	  {{UpdateAgreementStatus_errorMessage}} 
+       	</td>
+          
+          
+        </tr>
+	
+		<tr>
+         
+          
+          <td data-title="">
+          <md-input-container class="md-block" flex-gt-sm >
+            <label>Select Agrremet</label>
+            <md-select ng-model="update.agreementId">
+                <md-option ng-repeat="data in listdata" value={{data.agreementId}} required>
+                    {{data.agreementId}}
+                </md-option>
+            </md-select>
+            <div ng-messages="updateStatusForm.agreementId.$error">
+                <div ng-message="required">agreementId is required.</div>
+            </div>
+       </md-input-container>
+          </td>
+           <td data-title="">
+           <md-input-container class="md-block" flex-gt-sm >
+            <label>Select Status Type</label>
+            <md-select ng-model="update.statusType">
+                <md-option ng-repeat="statusType in statusTypeList" value={{statusType}} required>
+                    {{statusType}}
+                </md-option>
+            </md-select>
+            <div ng-messages="updateStatusForm.statusType.$error">
+                <div ng-message="required">statusType is required.</div>
+            </div>
+       </md-input-container>
+           </td>
+        </tr>
+		
+        <tr>
+          <td data-title="" colspan="2">
+           <md-button type="submit" class="md-raised md-button md-ink-ripple" ng-disabled="updateStatusForm.$invalid" >UPDATE STATUS</md-button>
+          </td>
+         
+          
+        </tr>
+		
+        
+      </tbody>
+    </table>
+    </form>
+	
+	</div>
+	</div>
+  </div>
+  
+  <div class="table-responsive-vertical shadow-z-1" layout-align=""> 
+<div id="table-wrapper">
+<div id="table-scroll">
+<md-toolbar class="md-theme-light" >
+    		<h2 class="md-toolbar-tools" layout="row" layout-align="center center">
+      			<span>Upload Draft Agreement</span>
+    		</h2>
+</md-toolbar>
+<form name="uploaddraft" ng-submit="submituploaddraft()" enctype=”multipart/form-data” ng-show="true" ng-cloak>
+  
+
+  <!-- Table starts here -->
+  <table id="table" class="table table-hover table-mc-light-blue">
+      
+      <tbody>
+
+
+        <tr>
+          <td data-title="" colspan="2">   	
+          {{uploaddraft_successMessage}}
+       	  {{uploaddraft_errorMessage}} 
+       	</td>
+          
+          
+        </tr>
+	
+		<tr>
+         
+          
+          <td data-title="">
+          <md-input-container class="md-block" flex-gt-sm >
+            <label>Select Agrremet</label>
+            <md-select ng-model="upload.agreementId">
+                <md-option ng-repeat="data in listdata" value={{data.agreementId}} required>
+                    {{data.agreementId}}
+                </md-option>
+            </md-select>
+            <div ng-messages="uploaddraft.agreementId.$error">
+                <div ng-message="required">agreementId is required.</div>
+            </div>
+       </md-input-container>
+          </td>
+           <td data-title="">
+           <md-input-container class="md-block" flex-gt-sm >
+            <!-- <label>Select File to upload</label> -->
+            <!-- <input type = "file" fileread="upload.myFile" name="file"/> -->
+            <input class="inline-block" type="file" name="file" ng-model="file" data-rule-required="true" id="file"  accept=".pdf">
+            <div ng-messages="uploaddraft.file.$error">
+                <div ng-message="required">file is required.</div>
+            </div>
+       </md-input-container>
+           </td>
+        </tr>
+		
+        <tr>
+          <td data-title="" colspan="2">
+           <md-button type="submit" class="md-raised md-button md-ink-ripple" ng-disabled="uploaddraft.$invalid" >UPLOAD</md-button>
+          </td>
+         
+          
+        </tr>
+		
+        
+      </tbody>
+    </table>
+    </form>
+	
+	</div>
+	</div>
+  </div>
+
+       	
+
+<div>&nbsp;&nbsp;</div>
+</br>
+</br>
+
+ <!-- <h3 align="center"><a href="internal_newagreement" >Create New Rent Agreement</a><h3> -->
+

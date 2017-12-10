@@ -1,0 +1,151 @@
+<html lang="en">
+<head>
+
+	<meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
+ <!-- Pluto CSS -->
+			<link href="home/css/bootstrap.min.css" rel="stylesheet">
+			<!-- Font Awesome CSS -->
+			<link rel="stylesheet" href="home/fonts/font-awesome.min.css" type="text/css" media="screen">
+			<!-- Include roboto.css to use the Roboto web font, material.css to include the theme and ripples.css to style the ripple effect -->
+			<link href="home/css/material.min.css" rel="stylesheet">
+			<link href="home/css/ripples.min.css" rel="stylesheet">
+			<link href="home/css/main.css" rel="stylesheet">
+			
+			<link href="home/css/animate.min.css" rel="stylesheet">
+ <!-- Pluto CSS -->	
+<!-- Angular Material style sheet -->
+
+<link href="assets/codepen.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0-rc5/angular-material.min.css">
+</head>
+
+
+<body ng-app="namami" ng-controller="admindashboardCtr">
+
+<div flex>
+<div ng-include="'header.html'"></div>
+<div>
+
+<h3 align="center">{{errorStatus}}<h3>
+
+<div flex layout="row" layout-md="column" layout-sm="column" > 
+
+
+<div class="table-responsive-vertical shadow-z-1" style="margin: 0px auto; text-align: center;"> 
+<md-toolbar class="md-theme-light" >
+    <h2 class="md-toolbar-tools" layout="row" layout-align="center center">
+      <span>Agreements Details</span>
+    </h2>
+  </md-toolbar>
+  
+
+  <!-- Table starts here -->
+ <table id="table" class="table table-hover table-mc-light-blue">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Start Date</th>
+		  <th>Rent</th>
+		  <th>Advance</th>
+		  <th>Status</th>
+		  <th></th>
+<th></th>		 
+        </tr>
+      </thead>
+      <tbody>
+
+
+        <tr ng-repeat="data in listdata">
+          <td data-title="No"><a href="#" >{{data.agreementId}}</a></td>
+          <td data-title="Start date">
+           {{data.agreementStartDate}}
+          </td>
+		   <td data-title="Rent">{{data.rentPerMonth}} </td>
+		   <td data-title="Advance">{{data.advanceDeposit}}</td>
+          <td data-title="Status">{{tracker_data.agreement_status}}</td>
+		   <td data-title=""><a href="#">Edit</a></td>
+		   <td>
+		    <md-button class="md-primary md-raised" ng-click="showAlert($event)"   flex="100"  flex-gt-md="auto">
+      Help
+    </md-button>
+  
+		   </td>
+        </tr>
+
+      </tbody>
+    </table>
+	
+  </div>
+ 
+
+</div>
+
+   
+
+ 
+</br>
+</br>
+ <h3 align="center"><a href="newAgreement.html" >Create New Rent Agreement</a><h3>
+<div id="loaders" layout="row" layout-align="center center">
+    <md-progress-circular md-mode="indeterminate"  ng-show=loading></md-progress-circular>
+ </div>
+
+ 
+</body>
+
+
+
+
+<!-- Angular Material requires Angular.js Libraries -->
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
+
+<!-- Angular Material Library -->
+<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0-rc5/angular-material.min.js"></script>
+
+<!-- Your application bootstrap  -->
+<script type="text/javascript">
+	
+	/**
+	 * You must include the dependency on 'ngMaterial' 
+	 */
+	angular.module('namami', [ 'ngMaterial', 'menuApp' ]);	
+
+	
+</script>
+
+<script>
+	document.write('<base href="' + document.location + '" />');
+
+	var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+};
+
+</script>
+<script src="js/menuService.js"></script>
+<script src="js/dashboard.js"></script>
+<script src="js/codepen.js"></script>
+<script src="js/constants.js"></script>
+<script src="js/app.js"></script>
+</html>
