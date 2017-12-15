@@ -159,8 +159,10 @@ public class UserServiceImpl implements UserService {
         String salt = null;;
 		try {
 			salt = commonUtils.getSalt();
-		} catch (NoSuchAlgorithmException | NoSuchProviderException e) {
+		} catch (NoSuchAlgorithmException e) {
 			
+			e.printStackTrace();
+		}catch (NoSuchProviderException e){
 			e.printStackTrace();
 		}
          
