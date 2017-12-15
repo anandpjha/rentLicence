@@ -1,0 +1,1292 @@
+
+
+        <div layout="row">
+
+            <!--<div flex-sm="100" flex-gt-sm="100" flex-md="100" flex-gt-md="80" flex-lg="50" flex-gt-lg="40"  ng-cloak ng-cloak > -->
+            <div flex="40" flex-sm="100" flex-md="100" flex-gt-md="50" flex-gt-lg="40" ng-cloak ng-cloak>
+                <md-tabs md-dynamic-height md-border-bottom md-selected="selectedIndex">
+
+                    <md-tab label="Agreement Terms">
+                            <md-content flex layout="row" layout-md="column" layout-sm="column" layout-padding ng-show="ismsg">
+                                <md-card >
+                                    
+                                    <md-card-content>
+                                        {{agreement.sucessMsg}} {{trm.errorMessage}}{{TermMsg}}
+                                    </md-card-content>
+                                   
+                                </md-card>
+                            </md-content>
+                   
+                        <md-content class="md-padding">
+                            <form name="trmForm" ng-submit="submitTrm()" ng-show="true" ng-cloak>
+                              <div layout-gt-sm="row">
+                                 <md-input-container class="md-block" flex-gt-sm>
+							        <label>Agreement Type</label>
+							        <md-select name="agreementType" ng-model="trm.agreementType" ng-required="true">
+	          							<md-option value="Residential">Residential</md-option>
+	  									<md-option value="Commercial">Commercial</md-option>
+	       							 </md-select>
+	       							 <div ng-messages="prpForm.agreementType.$error">
+										<div ng-message="required">Agreement Type is required.</div>
+									 </div>
+							        </md-input-container> 
+							        
+                                 <md-input-container class="md-block" flex-gt-sm>
+							        <label>Agreement City</label>
+							        <md-select name="agreementCity" ng-model="trm.agreementCity" ng-required="true">
+	          							<md-option value="PUNE">PUNE</md-option>
+	  									<md-option value="MUMBAI">MUMBAI</md-option>
+	       							 </md-select>
+	       							 <div ng-messages="prpForm.agreementCity.$error">
+										<div ng-message="required">Agreement City is required.</div>
+									 </div>
+							     </md-input-container>  
+                                </div>
+                                <div layout-gt-sm="row" >
+                                
+                                  <md-input-container class="md-block" flex-gt-sm >
+                                	<label>Agreement Start Date</label>
+                                	<input type="date" name="agreementStartDate" ng-model="trm.agreementStartDate" ng-required="true">
+							        
+                                 </md-input-container>
+                                
+                                 <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Duration in Months</label>
+                                        <input name="numberOfMonths" id="agreementPeriodInMonths" ng-model="trm.agreementPeriodInMonths" required ng-pattern="/^[0-9]{1,5}$/" ng-change="findAgreementEndDate()">
+                                        <div ng-messages="trmForm.numberOfMonths.$error">
+                                            <div ng-message="required">Number of Months is required.</div>
+                                            <div ng-message="pattern" >That doesn't look like a valid Number of Months. </div>
+                                        </div>
+                                 </md-input-container>
+                               </div>
+                               <div layout-gt-sm="row" >
+                                    <md-input-container class="md-block" flex-gt-sm>
+										<label>Notice Period</label>
+                                        <input name="lockInPeriod" id="lockInPeriod" ng-model="trm.lockInPeriod" required ng-pattern="/^[0-9]{1,5}$/">
+                                        <div ng-messages="trmForm.lockInPeriod.$error">
+                                            <div ng-message="required">Notice Period is required.</div>
+                                             <div ng-message="pattern" >That doesn't look like a valid Lock-in Period. </div>
+                                        </div>
+                                    </md-input-container>
+                                    
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Rent</label>
+                                        <input name="rentPerMonth" id="rentPerMonth" ng-model="trm.rentPerMonth" ng-required="!trm.isVaryingRent" ng-pattern="/^[0-9]{1,10}$/">
+                                        <div ng-messages="trmForm.rentPerMonth.$error">
+                                            <div ng-message="required">Please enter rent per month</div>
+                                            <div ng-message="pattern" >That doesn't look like a valid rent per month. </div>
+                                        </div>
+                                    </md-input-container>
+                                     
+                                 </div>
+                                 
+                                  <div layout-gt-sm="row" >
+                                    
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <md-checkbox ng-model="trm.isRefundable" aria-label="Non-Refundable" ng-true-value="true" ng-false-value="false" class="md-warn md-align-top-left">
+                                            <label>Non-Refundable</label>
+                                        </md-checkbox>
+                                            <div ng-messages="trmForm.deposit.$error">
+                                                <div ng-message="required">Deposit is required.</div>
+                                            </div>
+                                    </md-input-container>
+                                    
+                                    <md-input-container>
+                                        <label>Security Deposit</label>
+                                        <input name="deposit" id="deposit" ng-model="trm.advanceDeposit"  ng-pattern="/^[0-9]{1,10}$/">
+                                        <div ng-messages="trmForm.deposit.$error">
+                                            
+                                             <div ng-message="pattern" >That doesn't look like a valid Security Deposit. </div>
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                                
+                                <!-- <div layout-gt-sm="row" ng-show="trm.advanceDeposit!=''"> -->
+                               <!-- <md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding ng-show="trm.advanceDeposit!=''" style="height: 70px"> -->
+                               <div layout-gt-sm="row" ng-show="trm.advanceDeposit" >
+                               <label>Please provide below Security Deposit's Cheque Details: </label>
+                               </div>
+                                <div layout-gt-sm="row" ng-show="trm.advanceDeposit" >
+                                <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Cheque No</label>
+                                        <input name="chequeNo" id="chequeNo" ng-model="trm.chequeNo" ng-pattern="/^[0-9]{1,5}$/" >
+                                         <div ng-messages="trmForm.chequeNo.$error">
+                                         
+                                            <div ng-message="pattern" >not valid</div>
+                                        </div> 
+                                </md-input-container>
+                                
+                                
+                                
+                                <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Name Of Bank</label>
+                                        <input name="nameOfBank" id="nameOfBank" ng-model="trm.nameOfBank" >
+                                        
+                               </md-input-container>
+                               <!-- </div>
+                               <div layout-gt-sm="row" ng-show="trm.advanceDeposit!=''" > -->
+                               <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Branch Name</label>
+                                        <input name="branchName" id="branchName" ng-model="trm.branchName" >
+                                        
+                               </md-input-container>
+                               
+                               <!--  <md-datepicker name="dateOfCheque" ng-model="trm.dateOfCheque" md-placeholder="Date of Cheque" ng-required="true" md-min-date="minDate" md-max-date="maxDate"></md-datepicker> -->
+                               <md-input-container class="md-block" flex-gt-sm >
+                                	<label>Date of Cheque</label>
+                                	<input type="date" name="dateOfCheque" ng-model="trm.dateOfCheque">
+							        
+                                 </md-input-container>
+                                </div>
+                           
+                                
+								<!-- <div layout-gt-sm="row">
+                                  
+                                    <md-input-container class="md-block" flex-gt-sm ng-show="!trm.isVaryingRent">
+                                        <label>Rent</label>
+                                        <input name="rentPerMonth" id="rentPerMonth" ng-model="trm.rentPerMonth" ng-required="!trm.isVaryingRent" ng-pattern="/^[0-9]{1,10}$/">
+                                        <div ng-messages="trmForm.rentPerMonth.$error">
+                                            <div ng-message="required">Please enter rent per month</div>
+                                            <div ng-message="pattern" >That doesn't look like a valid rent per month. </div>
+                                        </div>
+                                    </md-input-container>
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <md-checkbox ng-model="trm.isVaryingRent" aria-label="Varying Rent" class="md-warn md-align-top-left">
+                                            <label>Varying Rent</label>
+                                        </md-checkbox>
+                                            <div ng-messages="trmForm.isVaryingRent.$error">
+                                                <div ng-message="required">isVaryingRent is required.</div>
+                                            </div>
+                                    </md-input-container>
+                                                                      
+                                </div>
+								
+								
+                               
+								<div layout-gt-sm="row" ng-show="trm.isVaryingRent">
+								<p> Please Enter month number & rent for this month.</p>
+								</div>
+                                <div layout-gt-sm="row">
+                                <fieldset  data-ng-repeat="rent in agreement.terms.varyingRents" ng-show="trm.isVaryingRent">
+                                
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <input name="monthNo" ng-model="rent.monthNumber" name="rent.month{{$index}}" placeholder="Month number" ng-pattern="/^[0-9]{1,5}$/">
+                                         <div ng-messages="trmForm.monthNo.$error">
+                                            <div ng-message="pattern">Please enter a valid month number</div>
+                                        </div>   
+                                    </md-input-container>
+                                    
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <input name="monthAmount" ng-model="rent.rent" name="rent.monthRent{{$index}}" placeholder="Rent" ng-change="addNewVaryingRent($index)" ng-pattern="/^[0-9]{1,10}$/">                                           
+                                         <div ng-messages="trmForm.monthAmount.$error">
+                                            <div ng-message="pattern">Please enter a valid month Amount</div>
+                                        </div>
+									</md-input-container>
+									<br>
+									<md-input-container > 
+										
+									<a href="" style="color: black;" ng-show="$last" ng-click="removeVaryingRent()"><md-button md-no-ink class="md-primary">Delete Last Row</md-button></a> 
+										
+									</md-input-container>
+                                
+                                </fieldset>
+                                </div> -->
+                               
+                                <div flex>
+                                    <!-- <md-button type="button" class="md-raised md-button md-ink-ripple" ng-click="trmReset()">RESET</md-button> -->
+                                    <md-button type="submit" class="md-raised md-button md-ink-ripple" ng-disabled="trmForm.$invalid">SUBMIT</md-button>
+                                </div>
+
+                            </form>
+
+                        </md-content>
+                    </md-tab>
+
+
+                    <md-tab label="Owner" ng-disabled="locked">
+                        <md-content class="md-padding">
+							
+                            <md-content flex layout="row" layout-md="column" layout-sm="column" layout-padding>
+                            	<md-card ng-show="ispersonmsg">
+                                    <md-card-content>
+                                        {{onr.errorMessage}}
+                                    </md-card-content>
+                                </md-card>
+                                <md-card ng-repeat="owner in agreement.owners">
+                                    
+                                    <md-card-content>
+                                    	
+                                        <p>Name: <b>{{owner.personName}}</b> , Age:  {{owner.personAge}} </p>
+                                         <!-- {{owner.personName}} | {{owner.age}} | {{owner.aadharUid}} | {{owner.mobNumber}} | {{owner.email}} | {{owner.gender}} | {{owner.permAddress}} -->
+                                         <md-tooltip>
+                                         {{owner.personName}} | {{owner.personAge}} | {{owner.aadharUid}} | {{owner.mobNumber}} | {{owner.email}}  | {{owner.contectAddress}}
+                                         </md-tooltip>
+                                    </md-card-content>
+                                    <md-card-actions layout="row" layout-align="end center">
+                                        <md-button ng-click="deleteOnr($index)">Delete</md-button>
+                                        <md-button ng-click="editOnr($index)">Edit</md-button>
+                                    </md-card-actions>
+                                </md-card>
+                            </md-content>
+
+                           
+
+                            <form name="onrForm" ng-submit="submitOnr()" ng-show="true" ng-cloak>
+ 								
+                               <div layout-gt-sm="row" >
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Full Name</label>
+                                        <input name="fullName" id="fullName" ng-model="onr.personName" ng-required="true">
+                                        <div ng-messages="onrForm.fullName.$error">
+                                            <div ng-message="required">Full Name is required.</div>
+                                        </div>
+                                    </md-input-container>
+                                     <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Age</label>
+                                        <input name="age" id="age" ng-model="onr.personAge" ng-required="true" ng-pattern="/^[0-9]{1,3}$/">
+                                        <div ng-messages="onrForm.age.$error">
+                                            <div ng-message="required">Age is required.</div>
+                                            <div ng-message="pattern">Please enter a valid age</div>
+                                        </div>
+                                    </md-input-container> 
+                                </div>
+
+                                <div layout-gt-sm="row" >
+                                     <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Occupation</label>
+                                        <input name="occupation" id="occupation" ng-model="onr.occupation" ng-required="true">
+                                        <div ng-messages="onrForm.occupation.$error">
+                                            <div ng-message="required">Occupation is required.</div>
+                                        </div>
+                                    </md-input-container>
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Mobile No.</label>
+                                        <input name="mobNumber" id="mobNumber" ng-model="onr.mobNumber" ng-required="true" ng-pattern="/^[0-9]{10,12}$/">
+                                        <div ng-messages="onrForm.mobNumber.$error">
+                                            <div ng-message="required">Mobile Number is required.</div>
+                                            <span ng-message="pattern">Please enter a valid Mobile number</span>
+                                        </div>
+                                    </md-input-container>
+                                </div>
+
+                               <div layout-gt-sm="row" >
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>PAN No.</label>
+                                        <input name="pan" id="pan" ng-model="onr.panNo" ng-required="true">
+                                        <div ng-messages="onrForm.pan.$error">
+                                            <div ng-message="required">PAN is required.</div>
+                                        </div>
+                                    </md-input-container>
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Aadhaar UID</label>
+                                        <input name="uid" id="uid" ng-model="onr.aadharUid" ng-required="true">
+                                        <div ng-messages="onrForm.uid.$error">
+                                            <div ng-message="required">Aadhaar UID is required.</div>
+                                        </div>
+                                    </md-input-container>
+                                </div>
+
+                              <div layout-gt-sm="row" >
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Email Address
+                                        </label>
+                                        <input type="email" name="email" id="email" ng-model="onr.email" ng-required="true" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/">
+                                        <div ng-messages="onrForm.email.$error">
+                                            <div ng-message="required">Email address is required.</div>
+                                           <div ng-message="pattern">Please enter a valid email</div>
+                                        </div>
+                                    </md-input-container>
+                                    
+                                     <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Permanent address</label>
+                                        <textarea ng-model="onr.contectAddress" columns="1" md-maxlength="150" rows="5" ng-required="true"></textarea>
+                                        <div ng-messages="onrForm.contectAddress.$error">
+                                            <div ng-message="required">Permanent address is required.</div>
+                                        </div>
+                                    </md-input-container>
+
+                                   <!--  <md-input-container>
+                                        <label>Biometric is </label>
+                                        <md-radio-group name="gender" id="gender" ng-model="onr.gender" ng-required="true" class="" layout="row">
+                                            <md-radio-button value="F">Female</md-radio-button>
+                                            <md-radio-button value="M">Male</md-radio-button>
+                                        </md-radio-group>
+                                        <div ng-messages="onrForm.gender.$error">
+                                            <div ng-message="required">Gender is required.</div>
+                                        </div>
+                                    </md-input-container> -->
+                                </div>
+
+                              
+
+
+                               <div layout-gt-sm="row" >
+                                    <md-button type="button" class="md-raised md-button md-ink-ripple" ng-click="onrReset()">RESET</md-button>
+                                    <md-button type="submit" class="md-raised md-button md-ink-ripple" ng-disabled="onrForm.$invalid">SUBMIT</md-button>
+                                </div>
+
+                            </form>
+
+
+
+                        </md-content>
+                    </md-tab>
+
+                    <md-tab label="Tenent" ng-disabled="locked">
+                        <md-content class="md-padding">
+
+                            <md-content flex layout="row" layout-md="column" layout-sm="column" layout-padding>
+                            	<md-card ng-show="ispersonmsg">
+                                    <md-card-content>
+                                        {{tnt.errorMessage}}
+                                    </md-card-content>
+                                </md-card>
+                                <md-card ng-repeat="tenant in agreement.tenants">
+                                    
+                                    <md-card-content>
+										<p>Name: <b>{{tenant.personName}}</b> , Age:  {{tenant.personAge}} </p>
+	 									<md-tooltip>
+	 										{{tenant.personName}} | {{tenant.personAge}} | {{tenant.aadharUid}} | {{tenant.mobNumber}} | {{tenant.email}}  | {{tenant.contectAddress}}
+	 									</md-tooltip>
+									</md-card-content>
+                                    <md-card-actions layout="row" layout-align="end center">
+                                        <md-button ng-click="deleteTnt($index)">Delete</md-button>
+                                        <md-button ng-click="editTnt($index)">Edit</md-button>
+                                    </md-card-actions>
+                                </md-card>
+                            </md-content>
+
+                           
+
+                            <form name="tntForm" ng-submit="submitTnt()" ng-show="true" ng-cloak>
+                                
+                                     <div layout-gt-sm="row" >
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Full Name</label>
+                                        <input name="fullName" id="fullName" ng-model="tnt.personName" ng-required="true">
+                                        <div ng-messages="tntForm.fullName.$error">
+                                            <div ng-message="required">Full Name is required.</div>
+                                        </div>
+                                    </md-input-container>
+                                     <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Age</label>
+                                        <input name="age" id="age" ng-model="tnt.personAge" ng-required="true" ng-pattern="/^[0-9]{1,3}$/">
+                                        <div ng-messages="tntForm.age.$error">
+                                            <div ng-message="required">Age is required.</div>
+                                            <div ng-message="pattern">Please enter a valid age</div>
+                                        </div>
+                                    </md-input-container> 
+                                </div>
+
+                                 <div layout-gt-sm="row" >
+                                     <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Occupation</label>
+                                        <input name="occupation" id="occupation" ng-model="tnt.occupation" ng-required="true">
+                                        <div ng-messages="tntForm.occupation.$error">
+                                            <div ng-message="required">Occupation is required.</div>
+                                        </div>
+                                    </md-input-container>
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Mobile No.</label>
+                                        <input name="mobNumber" id="mobNumber" ng-model="tnt.mobNumber" ng-required="true" ng-pattern="/^[0-9]{10,12}$/">
+                                        <div ng-messages="tntForm.mobNumber.$error">
+                                            <div ng-message="required">Mobile Number is required.</div>
+                                             <div ng-message="pattern">Please enter a valid Mobile number</div>
+                                        </div>
+                                    </md-input-container>
+                                </div>
+
+                                 <div layout-gt-sm="row" >
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>PAN No.</label>
+                                        <input name="panNo" id="panNo" ng-model="tnt.panNo" ng-required="true">
+                                        <div ng-messages="tntForm.panNo.$error">
+                                            <div ng-message="required">PAN is required.</div>
+                                        </div>
+                                    </md-input-container>
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Aadhaar UID</label>
+                                        <input name="aadharUid" id="aadharUid" ng-model="tnt.aadharUid" ng-required="true">
+                                        <div ng-messages="tntForm.aadharUid.$error">
+                                            <div ng-message="required">Aadhaar UID is required.</div>
+                                        </div>
+                                    </md-input-container>
+                                </div>
+
+                                 <div layout-gt-sm="row" >
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Email Address
+                                        </label>
+                                        <input type="email" name="email" id="email" ng-model="tnt.email" ng-required="true" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/">
+                                        <div ng-messages="tntForm.email.$error">
+                                            <div ng-message="required">Email address is required.</div>
+                                            <div ng-message="pattern">Please enter a valid email</div>
+                                        </div>
+                                    </md-input-container>
+                                    
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Permanent address</label>
+                                        <textarea ng-model="tnt.contectAddress" columns="1" md-maxlength="150" rows="5" ng-required="true"></textarea>
+                                        <div ng-messages="tntForm.contectAddress.$error">
+                                            <div ng-message="required">Permanent address is required.</div>
+                                        </div>
+                                    </md-input-container>
+
+                                   <!--  <md-input-container>
+                                        <label>Biometric is </label>
+                                        <md-radio-group name="gender" id="gender" ng-model="tnt.gender" ng-required="true" class="" layout="row">
+                                            <md-radio-button value="F">Female</md-radio-button>
+                                            <md-radio-button value="M">Male</md-radio-button>
+                                        </md-radio-group>
+                                        <div ng-messages="tntForm.gender.$error">
+                                            <div ng-message="required">Gender is required.</div>
+                                        </div>
+
+                                    </md-input-container> -->
+
+                                </div>
+
+                                 
+
+
+                                <div layout-gt-sm="row" >
+                                    <md-button type="button" class="md-raised md-button md-ink-ripple" ng-click="tntReset()">RESET</md-button>
+                                    <md-button type="submit" class="md-raised md-button md-ink-ripple" ng-disabled="tntForm.$invalid">SUBMIT</md-button>
+                                </div>
+
+                            </form>
+
+                        </md-content>
+                    </md-tab>
+
+                    <md-tab label="Witness" ng-disabled="locked">
+                        <md-content class="md-padding">
+
+                            <md-content flex layout="row" layout-md="column" layout-sm="column" layout-padding>
+                            <md-card ng-show="ispersonmsg">
+                                    <md-card-content>
+                                        {{wtn.errorMessage}}
+                                    </md-card-content>
+                                </md-card>
+                                <md-card ng-repeat="witness in agreement.witnesses">
+                                  
+                                    <md-card-content>
+										<p>Name: <b>{{witness.personName}}</b> , Aadhar UID:  {{witness.aadharUid}} </p>
+	 									<md-tooltip>
+	 										{{witness.personName}} | {{witness.aadharUid}} | {{witness.mobNumber}} | {{witness.email}} | {{witness.contectAddress}}
+	 									</md-tooltip>
+									</md-card-content>
+                                    <md-card-actions layout="row" layout-align="end center">
+                                        <md-button ng-click="deleteWtn($index)">Delete</md-button>
+                                        <md-button ng-click="editWtn($index)">Edit</md-button>
+                                    </md-card-actions>
+                                </md-card>
+                            </md-content>
+
+                            
+
+                            <form name="wtnForm" ng-submit="submitWtn()" ng-show="true" ng-cloak>
+                                 <div layout-gt-sm="row" >
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Full Name</label>
+                                        <input name="fullName" id="fullName" ng-model="wtn.personName" ng-required="true">
+                                        <div ng-messages="wtnForm.fullName.$error">
+                                            <div ng-message="required">Full Name is required.</div>
+                                            <div></div>
+                                        </div>
+                                    </md-input-container>
+                                    
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Aadhaar UID</label>
+                                        <input name="aadharUid" id="aadharUid" ng-model="wtn.aadharUid" ng-required="true">
+                                        <div ng-messages="wtnForm.aadharUid.$error">
+                                            <div ng-message="required">Aadhaar UID is required.</div>
+                                        </div>
+                                    </md-input-container>
+                                     <!-- <md-input-container>
+                                        <label>Age</label>
+                                        <input name="age" id="age" ng-model="wtn.personAge" ng-required="true" ng-pattern="/^[0-9]{1,3}$/">
+                                        <div ng-messages="wtnForm.age.$error">
+                                            <div ng-message="required">Age is required.</div>
+                                            <div ng-message="pattern">Please enter a valid age</div>
+                                        </div>
+                                    </md-input-container>  -->
+                                </div>
+
+                                 <div layout-gt-sm="row" >
+                                     <!-- <md-input-container>
+                                        <label>Occupation</label>
+                                        <input name="occupation" id="occupation" ng-model="wtn.occupation" ng-required="true">
+                                        <div ng-messages="wtnForm.occupation.$error">
+                                            <div ng-message="required">Occupation is required.</div>
+                                            <div></div>
+                                        </div>
+                                    </md-input-container> -->
+                                   <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Mobile No.</label>
+                                        <input name="mobNumber" id="mobNumber" ng-model="wtn.mobNumber" ng-required="true" ng-pattern="/^[0-9]{10,12}$/">
+                                        <div ng-messages="wtnForm.mobNumber.$error">
+                                            <div ng-message="required">Mobile Number is required.</div>
+                                             <div ng-message="pattern">Please enter a valid Mobile number</div>
+                                        </div>
+                                    </md-input-container>
+                                    
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Email Address
+                                        </label>
+                                        <input type="email" name="email" id="email" ng-model="wtn.email" ng-required="false" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/">
+                                        <div ng-messages="wtnForm.email.$error">
+                                            <div ng-message="required">Email address is required.</div>
+                                             <div ng-message="pattern">Please enter a valid email</div>
+                                        </div>
+                                    </md-input-container>
+                                    
+                                </div>
+
+                                <!-- <div flex>
+                                    <md-input-container>
+                                        <label>PAN No.</label>
+                                        <input name="panNo" id="panNo" ng-model="wtn.panNo" ng-required="true">
+                                        <div ng-messages="wtnForm.panNo.$error">
+                                            <div ng-message="required">PAN is required.</div>
+                                        </div>
+                                    </md-input-container>
+                                    
+                                </div> -->
+<!-- 
+                                <div layout-gt-sm="row" >
+                                    
+
+                                    <md-input-container>
+                                        <label>Biometric is </label>
+                                        <md-radio-group name="gender" id="gender" ng-model="wtn.gender" ng-required="true" class="" layout="row">
+                                            <md-radio-button value="F">Female</md-radio-button>
+                                            <md-radio-button value="M">Male</md-radio-button>
+                                        </md-radio-group>
+                                        <div ng-messages="wtnForm.gender.$error">
+                                            <div ng-message="required">Gender is required.</div>
+                                        </div>
+
+                                    </md-input-container>
+                                </div> -->
+
+                                 <div layout-gt-sm="row" >
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Permanent address</label>
+                                        <textarea ng-model="wtn.contectAddress" columns="1" md-maxlength="150" rows="5" ng-required="true"></textarea>
+                                        <div ng-messages="wtnForm.contectAddress.$error">
+                                            <div ng-message="required">Permanent address is required.</div>
+                                        </div>
+                                    </md-input-container>
+                                </div>
+
+                                 <div layout-gt-sm="row" >
+                                    <md-button type="button" class="md-raised md-button md-ink-ripple" ng-click="wtnReset()">RESET</md-button>
+                                    <md-button type="submit" class="md-raised md-button md-ink-ripple" ng-disabled="wtnForm.$invalid">SUBMIT</md-button>
+                                </div>
+
+                            </form>
+
+                        </md-content>
+                    </md-tab>
+
+                    <md-tab label="Property" ng-disabled="locked">
+                    
+                    		<md-content flex layout="row" layout-md="column" layout-sm="column" layout-padding ng-show="isprpmsg">
+                                <md-card >
+                                    
+                                    <md-card-content>
+                                        {{Prop.sucessMsg}} {{errorMessage}}{{propertyMsg}}
+                                    </md-card-content>
+                               
+                                </md-card>
+                            </md-content>
+                            
+                        <md-content class="md-padding">
+
+                           <!--  <md-content flex layout-padding class="md-warn"> {{prp.errorMessage}} </md-content> -->
+
+                            <form name="prpForm" ng-submit="submitProp()" ng-show="true" ng-cloak>
+
+                                 <div layout-gt-sm="row" >
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Property Type</label>
+                                        <md-select ng-model="prp.propertyType">
+                                            <md-option ng-repeat="propertyType in propertyTypes" value={{propertyType.value}} selected="{{ propertyType.value == prp.propertyType.value ? 'selected' : '' }}">
+                                                {{propertyType.type}}
+                                            </md-option>
+                                        </md-select>
+                                        <div ng-messages="prpForm.propertyType.$error">
+                                            <div ng-message="required">Property Type is required.</div>
+                                        </div>
+                                    </md-input-container>
+
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Flat/shop/office Number</label>
+                                        <input name="propertyNumber" id="propertyNumber" ng-model="prp.propertyNumber" >
+                                        <div ng-messages="prpForm.propertyNumber.$error">
+                                            <div ng-message="required">Property Number is required.</div>
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                                
+                                 <div layout-gt-sm="row" >
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Built Up area(Sq Ft)</label>
+                                        <input name="builtUpArea" id="builtUpArea" ng-model="prp.builtUpArea" ng-required="true" ng-pattern="/^[0-9]{1,5}$/">
+                                        <div ng-messages="prpForm.builtUpArea.$error">
+                                            <div ng-message="required">Built Up Area is required.</div>
+                                             <div ng-message="pattern">Please enter a valid Built Up area</div>
+                                        </div>
+                                    </md-input-container>
+
+                                   <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Floor No</label>
+                                        <input name="floorNo" id="floorNo" ng-model="prp.floorNo" ng-required="true" ng-pattern="/^[0-9]{1,3}$/">
+                                        <div ng-messages="prpForm.floorNo.$error">
+                                            <div ng-message="required">Floor No is required.</div>
+                                            <div ng-message="pattern">Please enter a valid Floor No</div>
+                                        </div>
+                                    </md-input-container>
+
+                                </div>
+                                
+                                <div layout-gt-sm="row" >
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Building Name</label>
+                                        <input name="buildingName" id="buildingName" ng-model="prp.buildingName" ng-required="false">
+                                        <div ng-messages="prpForm.buildingName.$error">
+                                            <div ng-message="required">Building Name is required.</div>
+                                        </div>
+                                    </md-input-container>
+
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Road</label>
+                                        <input name="road" id="road" ng-model="prp.road" ng-required="false">
+                                        <div ng-messages="prpForm.road.$error">
+                                            <div ng-message="required">Road is required.</div>
+                                        </div>
+                                    </md-input-container>
+                                </div>
+
+                                 <div layout-gt-sm="row" >
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Property Identity Type</label>
+                                        <md-select ng-model="prp.propertyIdentityType" type="number">
+                                            <md-option ng-repeat="propertyIdentityType in propertyIdentityTypes" value={{propertyIdentityType.value}} selected="{{ propertyIdentityType.value == prp.propertyIdentityType.value ? 'selected' : '' }}">
+                                                {{propertyIdentityType.type}}
+                                            </md-option>
+                                        </md-select>
+                                        <div ng-messages="prpForm.propertyIdentityType.$error">
+                                            <div ng-message="required">Property Identity Type is required.</div>
+                                        </div>
+                                    </md-input-container>
+
+                                   <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Property Identity</label>
+                                        <input name="propertyIdentity" id="propertyIdentity" ng-model="prp.propertyIdentity" ng-required="true">
+                                        <div ng-messages="prpForm.propertyIdentity.$error">
+                                            <div ng-message="required">Property Identity is required.</div>
+                                        </div>
+                                    </md-input-container>
+                                </div>
+
+                                
+
+                                
+
+                                <div layout-gt-sm="row" >
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Village</label>
+                                        <input name="city" id="city" ng-model="prp.city" ng-required="true">
+                                        <div ng-messages="prpForm.city.$error">
+                                            <div ng-message="required">City is required.</div>
+                                        </div>
+                                    </md-input-container>
+
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>District</label>
+                                        <md-select ng-model="prp.district">
+                                            <md-option ng-repeat="district in districts" value={{district.value}} selected="{{ district.value == prp.district.value ? 'selected' : '' }}">
+                                                {{district.type}}
+                                            </md-option>
+                                        </md-select>
+                                       <!--  <input name="district" id="district" ng-model="prp.district" ng-required="true"> -->
+                                        <div ng-messages="prpForm.district.$error">
+                                            <div ng-message="required">District is required.</div>
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                                
+                                 <div layout-gt-sm="row" >
+                                   <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Tahasil</label>
+                                        <input name="tahasil" id="tahasil" ng-model="prp.tahasil" ng-required="true">
+                                        <div ng-messages="prpForm.tahasil.$error">
+                                            <div ng-message="required">Tahasil is required.</div>
+                                        </div>
+                                    </md-input-container>
+
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Municipal</label>
+                                        <input name="municipal" id="municipal" ng-model="prp.municipal" ng-required="true">
+                                        <div ng-messages="prpForm.municipal.$error">
+                                            <div ng-message="required">Municipal is required.</div>
+                                        </div>
+                                    </md-input-container>
+                                </div>
+
+                                 <div layout-gt-sm="row" >
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>State</label>
+                                        <md-select ng-model="prp.state">
+                                            <md-option ng-repeat="state in states" value={{state.value}} selected="{{ state.value == prp.state.value ? 'selected' : '' }}">
+                                                {{state.type}}
+                                            </md-option>
+                                        </md-select>
+                                       <!--  <input name="state" id="state" ng-model="prp.state" ng-required="true"> -->
+                                        <div ng-messages="prpForm.state.$error">
+                                            <div ng-message="required">State is required.</div>
+                                        </div>
+                                    </md-input-container>
+
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Pin Code</label>
+                                        <input name="pinCode" id="pinCode" ng-model="prp.pinCode" ng-required="true" ng-pattern="/^[0-9]{6,6}$/">
+                                        <div ng-messages="prpForm.pinCode.$error">
+                                            <div ng-message="required">Pin Code is required.</div>
+                                            <div ng-message="pattern">Please enter a valid Pin code</div>
+                                        </div>
+                                    </md-input-container>
+                                </div>
+
+                                <div layout-gt-sm="row" >
+                                    <!--<md-button type="button" class="md-raised md-button md-ink-ripple" ng-click="propReset()">RESET</md-button> -->
+                                    <md-button type="submit" class="md-raised md-button md-ink-ripple" ng-disabled="prpForm.$invalid">SUBMIT</md-button>
+                                </div>
+
+                            </form>
+
+                    </md-content> </md-tab>
+                        
+
+                    <md-tab label="Miscellaneous Terms" ng-disabled="locked">
+                    <md-content flex layout="row" layout-md="column" layout-sm="column" layout-padding ng-show="ismismsg">
+                                <md-card >
+                                    
+                                    <md-card-content>
+                                        {{mis.errorMessage}} {{mis.scussMessage}}{{miscellaneousMsg}}
+                                    </md-card-content>
+                               
+                                </md-card>
+                            </md-content>
+                        <md-content class="md-padding">
+                            
+                            <form name="misForm" ng-submit="submitMis()" ng-show="true" ng-cloak>
+                              <div layout-gt-sm="row" >
+                             		<md-input-container class="md-block" flex-gt-sm>
+                                        <label>Registration charge paid by</label>
+                                        <md-select ng-model="mis.regChargePaidByType" >
+                                            <md-option ng-repeat="regChargePaidByType in regChargePaidByTypes" value={{regChargePaidByType.value}} selected="{{ regChargePaidByType.value == mis.regChargePaidByType.value ? 'selected' : '' }}">
+                                                {{regChargePaidByType.type}}
+                                            </md-option>
+                                        </md-select>
+                                        
+                                    </md-input-container>  
+                                     <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Allow pets in Premises?</label>
+                                        <md-select ng-model="mis.petAllowType">
+                                            <md-option ng-repeat="petAllowType in petAllowTypes" value={{petAllowType.value}} selected="{{ petAllowType.value == mis.petAllowType.value ? 'selected' : '' }}">
+                                                {{petAllowType.type}}
+                                            </md-option>
+                                        </md-select>
+                                       
+                                    </md-input-container>
+                                 </div> 
+                                 
+                                
+                                 <div layout-gt-sm="row" >
+                                     <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Any Other Miscellaneous Terms</label>
+                                        <textarea name="miscellaneousTerms" id="miscellaneousTerms" ng-model="mis.miscellaneousTerms" > </textarea>
+                                        
+                                    </md-input-container>
+                                </div>
+                                
+                                 <div layout-gt-sm="row" >
+                                     <md-input-container class="md-block" flex-gt-sm>
+                                        <md-checkbox ng-model="mis.furnitureAndAppliancesSelected" aria-label="Furniture and Appliances" class="md-warn md-align-top-left" >
+                                            <label>Furniture and Appliances</label>
+                                        </md-checkbox>
+                                    </md-input-container>
+                                </div>
+                                
+                                 <div layout-gt-sm="row"  ng-show="mis.furnitureAndAppliancesSelected">
+                                                             
+                             		<md-input-container class="md-block" flex-gt-sm>
+                                        <label>Number of fans</label>
+                                        <input  type="number" step="any" name="fans" ng-model="mis.fans"  />
+                                    </md-input-container> 
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Number of Tube Light</label>
+                                        <input  type="number" step="any" name="tubeLight" ng-model="mis.tubeLight"  />
+                                    </md-input-container>   
+                                
+                                </div>
+                                
+                                 <div layout-gt-sm="row"  ng-show="mis.furnitureAndAppliancesSelected">
+                                                             
+                             		<md-input-container class="md-block" flex-gt-sm>
+                                        <label>Number of Bed</label>
+                                        <input  type="number" step="any" name="bed" ng-model="mis.bed"  />
+                                    </md-input-container> 
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Number of Sofa</label>
+                                        <input  type="number" step="any" name="sofa" ng-model="mis.sofa"  />
+                                    </md-input-container>   
+                                
+                                </div>
+                                
+                                 <div layout-gt-sm="row"  ng-show="mis.furnitureAndAppliancesSelected">
+                                                             
+                             		<md-input-container class="md-block" flex-gt-sm>
+                                        <label>Number of Table</label>
+                                        <input  type="number" step="any" name="table" ng-model="mis.table"  />
+                                    </md-input-container> 
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Number of Chair</label>
+                                        <input  type="number" step="any" name="chair" ng-model="mis.chair"  />
+                                    </md-input-container>   
+                                
+                                </div>
+                                
+                                 <div layout-gt-sm="row"  ng-show="mis.furnitureAndAppliancesSelected">
+                                                             
+                             		<md-input-container class="md-block" flex-gt-sm>
+                                        <label>Number of Air Conditioner</label>
+                                        <input  type="number" step="any" name="airConditioner" ng-model="mis.airConditioner" />
+                                    </md-input-container> 
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>Number of Geyser</label>
+                                        <input  type="number" step="any" name="geyser" ng-model="mis.geyser"  />
+                                    </md-input-container>   
+                                
+                                </div>
+                                
+                                 <!-- <div flex >
+                                    <md-input-container>
+                                        <md-checkbox ng-model="mis.utilitiesSelected" aria-label="Utilities" class="md-warn md-align-top-left" >
+                                            <label>Add Utilities/Expenses</label>
+                                            <div ng-messages="misForm.utilitiesSelected.$error">
+                                            	<div ng-message="required">Miscellaneous Terms is required.</div>
+                                        	</div>
+                                        </md-checkbox>
+                                            
+                                    </md-input-container>
+                                </div>
+                            
+                               <div flex ng-show="mis.utilitiesSelected"> 
+								
+								<md-card>
+        						<md-card-title>
+        							<b>Electricity</b>
+        						</md-card-title>
+                                   <md-input-container>
+                                      
+                                        <md-radio-group name="electricity" id="electricity" ng-model="mis.electricity" class="" layout="row">
+                                            <md-radio-button value="EL1">Tenant Pays Direct</md-radio-button>
+                                            <md-radio-button value="EL2">Tenant Pays Landlord</md-radio-button>
+                                            <md-radio-button value="EL3">Landlord Pays</md-radio-button>
+                                            <md-radio-button value="EL4">Do Not Specify</md-radio-button>
+                                        </md-radio-group>
+                                      
+                                    </md-input-container>
+								</md-card> 
+								
+								<md-card>
+        						<md-card-title>
+        							<b>Natural Gas</b>
+        						</md-card-title>
+                                   <md-input-container>
+                                      
+                                        <md-radio-group name="gas" id="gas" ng-model="mis.gas" class="" layout="row">
+                                            <md-radio-button value="GAS1">Tenant Pays Direct</md-radio-button>
+                                            <md-radio-button value="GAS2">Tenant Pays Landlord</md-radio-button>
+                                            <md-radio-button value="GAS3">Landlord Pays</md-radio-button>
+                                            <md-radio-button value="GAS4">Do Not Specify</md-radio-button>
+                                        </md-radio-group>
+                                       
+                                    </md-input-container>
+								</md-card> 
+								
+								<md-card>
+        						<md-card-title>
+        							<b>Water</b>
+        						</md-card-title>
+                                   <md-input-container>
+                                      
+                                        <md-radio-group name="water" id="water" ng-model="mis.water" class="" layout="row">
+                                            <md-radio-button value="WA1">Tenant Pays Direct</md-radio-button>
+                                            <md-radio-button value="WA2">Tenant Pays Landlord</md-radio-button>
+                                            <md-radio-button value="WA3">Landlord Pays</md-radio-button>
+                                            <md-radio-button value="WA4">Do Not Specify</md-radio-button>
+                                        </md-radio-group>
+                                       
+                                    </md-input-container>
+								</md-card> 
+								
+								<md-card>
+        						<md-card-title>
+        							<b>Telephone</b>
+        						</md-card-title>
+                                   <md-input-container>
+                                      
+                                        <md-radio-group name="telephone" id="telephone" ng-model="mis.telephone" class="" layout="row">
+                                            <md-radio-button value="TEL1">Tenant Pays Direct</md-radio-button>
+                                            <md-radio-button value="TEL2">Tenant Pays Landlord</md-radio-button>
+                                            <md-radio-button value="TEL3">Landlord Pays</md-radio-button>
+                                            <md-radio-button value="TEL4">Do Not Specify</md-radio-button>
+                                        </md-radio-group>
+                                       
+                                    </md-input-container>
+								</md-card> 
+								
+								<md-card>
+        						<md-card-title>
+        							<b>Internet</b>
+        						</md-card-title>
+                                   <md-input-container>
+                                      
+                                        <md-radio-group name="internet" id="internet" ng-model="mis.internet" class="" layout="row">
+                                            <md-radio-button value="NET1">Tenant Pays Direct</md-radio-button>
+                                            <md-radio-button value="NET2">Tenant Pays Landlord</md-radio-button>
+                                            <md-radio-button value="NET3">Landlord Pays</md-radio-button>
+                                            <md-radio-button value="NET4">Do Not Specify</md-radio-button>
+                                        </md-radio-group>
+                                       
+                                    </md-input-container>
+								</md-card> 
+								
+								<md-card>
+        						<md-card-title>
+        							<b>Cable/Television</b>
+        						</md-card-title>
+                                   <md-input-container>
+                                      
+                                        <md-radio-group name="television" id="television" ng-model="mis.television" class="" layout="row">
+                                            <md-radio-button value="TEL1">Tenant Pays Direct</md-radio-button>
+                                            <md-radio-button value="TEL2">Tenant Pays Landlord</md-radio-button>
+                                            <md-radio-button value="TEL3">Landlord Pays</md-radio-button>
+                                            <md-radio-button value="TEL4">Do Not Specify</md-radio-button>
+                                        </md-radio-group>
+                                       
+                                    </md-input-container>
+								</md-card> 
+								
+								<md-card>
+        						<md-card-title>
+        							<b>Other Expenses</b>
+        						</md-card-title>
+                                   <md-input-container>
+                                      
+                                        <md-radio-group name="other" id="other" ng-model="mis.other" class="" layout="row">
+                                            <md-radio-button value="OTH1">Tenant Pays Direct</md-radio-button>
+                                            <md-radio-button value="OTH2">Tenant Pays Landlord</md-radio-button>
+                                            <md-radio-button value="OTH3">Landlord Pays</md-radio-button>
+                                            <md-radio-button value="OTH4">Do Not Specify</md-radio-button>
+                                        </md-radio-group>
+                                       
+                                    </md-input-container>
+								</md-card> 
+								    
+                               
+                                 </div> -->
+                           
+                                
+                                <div flex>
+                                    <!--<md-button type="button" class="md-raised md-button md-ink-ripple" ng-click="misReset()">RESET</md-button> -->
+                                    <md-button type="submit" class="md-raised md-button md-ink-ripple" ng-disabled="misForm.$invalid">SUBMIT</md-button>
+                                </div>
+
+                            </form>
+
+                        </md-content>
+                    </md-tab>
+                
+                
+                 <md-tab label="Review & Confirm" ng-disabled="locked">
+                    <md-content flex layout="row" layout-md="column" layout-sm="column" layout-padding ng-show="isrevmsg">
+                                <md-card >
+                                    
+                                    <md-card-content>
+                                        {{rev.errorMessage}} {{rev.scussMessage}}{{reviewMsg}}
+                                    </md-card-content>
+                               
+                                </md-card>
+                            </md-content>
+                        <md-content class="md-padding">
+                            
+                            <form name="revForm" ng-submit="submitRev()" ng-show="true" ng-cloak>
+                              <div layout-gt-sm="row" >
+                             		<p>Please review agreement data & confirm once done.</p>
+                                 </div> 
+                                 
+                                 <div layout-gt-sm="row" >
+                             		<p>Before confirmation, Please read Our Terms & Conditions <a href="#">here</a>.</p>
+                                 </div>
+                                 
+                                  <div layout-gt-sm="row" >
+                             		<p>Please check below checkbox to insure you have read & Accept Our Terms & Conditions.</p>
+                                 </div>
+                                 
+                                <div layout-gt-sm="row" >
+                                     <md-input-container class="md-block" flex-gt-sm >
+                                      
+                                        <md-checkbox ng-model="rev.termsConditionSelected" aria-label="terms" class="md-warn md-align-top-left" ng-required="true">
+                                        <label><a href="#">Accept T&C</a></label>
+                                        </md-checkbox>
+                                       
+                                        <div ng-messages="revForm.termsConditionSelected.$error">
+                                            <div ng-message="required">Please check to accept Terms & Conditions</div>
+                                        </div>
+                                    </md-input-container>
+                                     
+                                </div>
+                                 
+                           
+                                
+                                <div flex>
+                                    <!--<md-button type="button" class="md-raised md-button md-ink-ripple" ng-click="misReset()">RESET</md-button> -->
+                                    <md-button type="submit" class="md-raised md-button md-ink-ripple" ng-disabled="revForm.$invalid">CONFIRM</md-button>
+                                </div>
+
+                            </form>
+
+                        </md-content>
+                    </md-tab>
+                    
+                </md-tabs>
+                </md-content>
+                </md-whiteframe>
+            </div>
+
+
+            <!-- <div class="hidden-xs"> -->
+<!--             <div hide-sm hide-md show-gt-md flex="60">
+                <md-card>
+                    <md-card-content>
+                        Particulars Amount Paid GRN/Transaction Id Date Stamp Duty Rs. 200 /- MH005317962201516E 03/12/2015 Registration Fee Rs. 1000 /- MH005337481201516E 04/12/2015 LEAVE AND LICENSE AGREEMENT This agreement is made and executed on 04/12/2015 at Raigad Between, 1) Name: Ramparmeshwaran M s , Age : About 65 Years, Occupation : Any Other , PAN: APJPS7293H , Aadhaar: 972044649782 Residing at: Block Sector:Nl-6 / 18 /7 sector 15, Road:., Nerul (e), Thane, Maharashtra, 400706 HEREINAFTER called ‘the Licensor (which expression shall mean and include the Licensor above named and also his/her/their respective heirs, successors, assigns, executors and administrators) AND 1) Name: Patil Siddharth Sunil , Age : About 25 Years, Occupation : Service , PAN: AZJPP6602K , Aadhaar: 369322632268 Residing at: Block Sector:302/19/kh-1, vastu vihar, sector 16, Road:., Kharghar , Raigarh(mh), Maharashtra, 410210 HEREINAFTER called ‘the Licensee’ (which expression shall mean and include only Licensee above named). WHEREAS the Licensor is absolutely seized and possessed of and or otherwise well and sufficiently entitled to all that constructed portion being unit described in Schedule I hereunder written and are hereafter for the sake of brevity called or referred to as Licensed Premises and is/are desirous of giving the said premises on Leave and License basis under Section 24 of the Maharashtra Rent Control Act, 1999. AND WHEREAS the Licensee herein is in need of temporary premises for his Residential use has/have approached the Licensor with a request to allow the Licensee herein to use and occupy the said premises on Leave and License basis for a period of 11 Months commencing from 15/10/2015 and ending on 14/09/2016 , on terms and subject to conditions hereafter appearing. AND WHEREAS the Licensor have agreed to allow the Licensee herein to use and occupy the said Licensed premises for his aforesaid Residential purposes only, on Leave and License basis for above mentioned period, on terms and subject to conditions hereafter appearing; NOW THEREFORE IT IS HEREBY AGREED TO, DECLARED AND RECORDED BY AND BETWEEN THE PARTIES HERETO AS FOLLOWS:- 1) Period: That the Licensor hereby grants to the Licensee herein a revocable leave and license, to occupy the Licensed Premises, described in Schedule I hereunder written without creating any tenancy rights or any other rights, title and interest in favour of the Licensee for a period of 11 Months commencing from 15/10/2015 and ending on 14/09/2016 LEAVE AND LICENSE AGREEMENT Page 1 of 4 Registered as Document No.10141/2015 at the office of Joint S.R. Panvel 2 on 04/12/2015 2) License Fee & Deposit: That the Licensee shall pay to the Licensor License fee at the rate of Rs. 8000 per month towards the compensation and Rs. 35000 interest free refundable deposit, for the use of the said Licensed premises. The amount of monthly compensation License fee shall be payable within first five days of the concerned month of Leave and License. 3) Payment of Deposit: 1] That the Licensee have paid / shall pay the above mentioned deposit/premium as mentioned above by Cheque/NEFT/RTGS No. 248705 , dated – 15/10/2015 , drawn on the Licensee’s Banking Account with Idbi Bank, Vashi Branch. Amount Rs. 30000/- 2] That the Licensee have paid / shall pay the above mentioned deposit/premium as mentioned above by Cash. Amount Rs. 5000/- 4) Maintenance Charges: That the all outgoings including all rates, taxes, levies, assessment, maintenance charges, non occupancy charges, etc. in respect of the said premises shall be paid by the Licensor. 5) Electricity Charges: The licensee herein shall pay the electricity bills directly for energy consumed on the licensed premises and should submit original receipts to Licensor indicating that the electricity bills are paid. 6) Use: That the Licensed premises shall only be used by the Licensee for Residential purpose.The Licensee shall maintain the said premises in its existing condition and damage, if any, caused to the said premises, the same shall be repaired by the Licensee at its own cost subject to normal wear and tear. The Licensee shall not do anything in the said premises which is or is likely to cause a nuisance to the other occupants of the said building or to the prejudice in any manner to the rights of Licensor in respect of said premises or shall not do any unlawful activities prohibited by State or Central Government . 7) Alteration: That the Licensee shall not make or permit to do any alteration or addition to the construction or arrangements (internal or external) to the Licensed premises without previous consent in writing from the Licensor. 8) No Tenancy: That the Licensee shall not claim any tenancy right and shall not have any right to transfer, assign, and sublet or grant any license or sub-license in respect of the Licensed Premises or any part thereof and also shall not mortgage or raise any loan against the said premises. 9) Inspection: That, the Licensor shall on reasonable notice given by the Licensor to the Licensee shall have a right of access either by himself / herself / themselves or through authorized representative to enter, view and inspect the Licensed premises at reasonable intervals. 10) Cancellation: That, Subject to the condition of lock in period (if any), if the Licensee commits default in regular and punctual payments of monthly compensation as herein before mentioned or commit/s breach of any of the terms, covenants and conditions of this agreement or if any legislation prohibiting the Leave and License is imposed, the Licensor shall be entitled to revoke and / or cancel the License hereby granted, by giving notice in writing of one month and the Licensee too will have the right to vacate the said premises by giving a notice in writing of one month to the Licensor as mentioned earlier. LEAVE AND LICENSE AGREEMENT Page 2 of 4 Registered as Document No.10141/2015 at the office of Joint S.R. Panvel 2 on 04/12/2015 11) Possession: That the immediately at on the expiration or termination or cancellation of this agreement the Licensee shall vacate the said premises without delay with all his goods and belongings. In the event of the Licensee failing and / or neglecting to remove himself and / or his articles from the said premises on expiry or sooner determination of this Agreement ,the Licensor shall be entitled to recover damages at the rate of double the daily amount of compensation per day and or alternatively the Licensor shall be entitled to remove the Licensee and his belongings from the Licensed premises, without recourse to the Court of Law. 12) Registration: This Agreement is to be registered and the expenditure of Stamp duty and registration fees and incidental charges, if any, shall be borne by the Licensee and Licensor equally . SCHEDULE I (Being the correct description of premise Apartment/Flat which is the subject matter of these presents) All that constructed portion being residential unit bearing Apartment/Flat No. 301 , Built-up :900 Sq. Ft., situated on the 3rd Floor of a Building known as ' Daffodils chs ' standing on the plot of land bearing Plot Number :70,SECTOR 20 ,Road: . , Location: Raigad-410210 , of Village: Kharaghar ,situated within the revenue limits of Tehsil Panvel and Dist Raigad and situated within the limits of Panvel Municipal Corporation. IN WITNESS WHEREOF the parties hereto have set and subscribed their respective signatures by way of putting thumb impression electronic signature hereto in the presence of witness, who are identifying the executants, on the day, month and year first above written. LEAVE AND LICENSE AGREEMENT Page 3 of 4 Registered as Document No.10141/2015 at the office of Joint S.R. Panvel 2 on 04/12/2015 Name & Address Photo Biometric Thumb Impression Digitally signed Licensor Name: Ramparmeshwaran M s Aadhaar: 972044649782 Address: Block Sector:Nl-6 / 18 /7 sector 15, Road:., Nerul (e), Thane, Maharashtra, 400706 Not Available Licensee Name: Patil Siddharth Sunil Aadhaar: 369322632268 Address: Block Sector:302/19/kh-1, vastu vihar, sector 16, Road:., Kharghar , Raigarh(mh), Maharashtra, 410210 Not Available Witness of execution -cum- identifier for all executants Name : Pandya Pankaj Vijaykumar Aadhaar : 522889481573 Address: sector 16, Road:., Kharghar , Raigarh(mh), Maharashtra, 410210 Not Required Witness of execution -cum- identifier for all executants Name : Suryawanshi Pravin E Aadhaar : 761280403160 Address: 603, Building Name:New dindoshi harmoni chs, Block Sector:Mantri park, new mhada colony,aarey milk colony, Road:., Goregaon east, Mumbai, Maharashtra, 400065 Not Required LEAVE AND LICENSE AGREEMENT Page 4 of 4 Registered as Document No.10141/2015 at the office of Joint S.R. Panvel 2 on 04/12/2015 Thumb Impression of Joint S.R. Panvel 2
+
+                    </md-card-content>
+                </md-card>
+            </div>
+ -->
+ 
+ <!-- start#  -->
+ <div hide-sm hide-md show-gt-md flex="60" height =" 10px";  overflow = "scroll";>
+    <!-- <center><img src="/static/img/rentalAgreementStamp2.jpg" height="250"></center> -->
+    <!-- <div  style="height:500px;"></div> -->
+    <md-card>
+    <md-card-content style=" height: 750px; overflow: scroll;">
+    <h3 align="center">LEAVE AND LICENCE AGREEMENT</h3>
+	
+	<p style="text-align:center;">This agreement is made and executed on <strong >{{trm.agreementStartDate==null ?'---------':trm.agreementStartDate}}</strong> at <strong >{{trm.agreementCity== null ? '----------':trm.agreementCity}}</strong>. </p><h3 style="text-align:center;">BETWEEN</h3>
+	<div>{{agreement.owners.length == 0 ? '-----------------------------------------------Owners details-----------------------------------------------' :''}}</div>
+	<div ng-repeat="owner in agreement.owners">
+		<p>
+   	 	<strong >{{owner.personName}} </strong> , Age: <strong >{{owner.personAge}} </strong> About  Years , Occupation: <strong >{{owner.occupation}} </strong> ,having contact number <strong >{{owner.mobNumber}} </strong> . Residing at: <strong >{{owner.contectAddress}} </strong>.
+   	 	</p>
+   	 	<p>PAN: <strong >{{owner.panNo}}</strong> UID:<strong >{{owner.aadharUid}}</strong></p>
+    </div>
+    <p>HEREINAFTER called 'the Licensor' (which expression shall mean and include the Licensor above named and also his respective heirs, successors, assigns, executors and administrators)</p>
+	
+	<p></p>
+
+	<h3 class="center" style="margin:10px 0;"> AND </h3>
+	<p><div>{{agreement.tenants.length == 0 ? '-----------------------------------------------Tenants details-----------------------------------------------' :''}}</div>
+        </p><div ng-repeat="tenant in agreement.tenants">
+		<p>
+   	 	<strong >{{tenant.personName}} </strong> , Age: <strong >{{tenant.personAge}} </strong> About  Years , Occupation: <strong >{{tenant.occupation}} </strong> ,having contact number <strong >{{tenant.mobNumber}} </strong> . Residing at: <strong >{{tenant.contectAddress}} </strong>.
+   	 	</p>
+   	 	<p>PAN: <strong >{{tenant.panNo}}</strong> UID:<strong >{{tenant.aadharUid}}</strong></p>
+    </div>
+    <p>HEREINAFTER called 'the Licensee' (which expression shall mean and include only Licensee above named).</p>
+    <p></p>
+<br>
+	<p>WHEREAS the Licensor/s is/are absolutely seized and possessed of and or otherwise well and sufficiently entitled to all that constructed portion being unit described in Schedule hereunder written and are hereafter for the sake of brevity called or referred to as Licensed Premises and is/are desirous of giving the said premises on Leave and Licence.</p>
+<br>
+	<p>AND WHEREAS the Licensee/s herein is/are in need of temporary premises for his/her/their <strong>{{trm.agreementType==null ?'-----------':trm.agreementType}}</strong> use has/have approached the Licensor/s with a request to allow the Licensee/s herein to use and occupy the said premises on Leave and License basis for a period of <strong>  {{trm.agreementPeriodInMonths==null ?'---------':trm.agreementPeriodInMonths}} Months </strong> commencing
+	from <strong>{{trm.agreementStartDate==null ?'---------':trm.agreementStartDate}}</strong> and ending on <strong>{{trm.agreementEndDate==null ?'---------':trm.agreementEndDate}}</strong>, on terms and subject to conditions hereafter appearing.</p>
+<br>
+	<p> AND WHEREAS the Licensor/s has/have agreed to allow the Licensee/s herein to use and occupy the said Licenced premises for his/her/their aforesaid
+	 <strong>{{trm.agreementType==null ?'-----------':trm.agreementType}}</strong> purposes only, on Leave and License basis for above mentioned period ,on terms and subject to conditions hereafter appearing;</p>
+<br>
+<h4 style="margin:10px 0;">
+NOW THEREFORE IT IS HEREBY AGREED TO, DECLARED AND RECORDED BY AND BETWEEN THE PARTIES HERETO AS FOLLOWS:-</h4>
+<ol style="page-break-after:always;">
+<li> <b>Period:</b> <p>That the Licensor hereby grants to the Licensee herein a revocable leave and license, to occupy the Licensed Premises, described in Schedule I hereunder written without creating any tenancy rights or any other rights, title and interest in favour of the Licensee for a period of <strong>{{trm.agreementPeriodInMonths==null ?'---------':trm.agreementPeriodInMonths}} Months</strong> commencing from <strong >{{trm.agreementStartDate==null ?'---------':trm.agreementStartDate}}</strong> and ending on <strong>{{trm.agreementEndDate==null ?'---------':trm.agreementEndDate}}</strong>. 
+</p>
+</li>
+<li> 
+	<div><b>Rent and Deposit:</b></div>
+			<div ng-show="trm.advanceDeposit=='' ">
+			
+			<p>That the Licensee/s shall pay to the Licensor/s <strong> Rs. {{trm.rentPerMonth==null ?'---------':trm.rentPerMonth}}</strong> per month towards the compensation for the use of the said Licenced premises. This amount shall be payable within first five days of the concerned month of Leave and Licence</p>
+			</div>
+			<div ng-show=" trm.advanceDeposit!=''">
+			<p> That the Licensee/s shall pay to the Licensor/s <strong> Rs. {{trm.rentPerMonth==null ?'---------':trm.rentPerMonth}}</strong> Per month towards the compensation and <strong >Rs. {{trm.advanceDeposit=='' ?'---------':trm.advanceDeposit}}</strong> Interest free <strong >{{trm.isRefundable==true ?'Non-Refundable':'Refundable'}}</strong> deposit, for the use of the said licensed premises. The amount of monthly compensation shall be payable within first five days of the concerned month of Leave and Licence.</p>
+			</div>
+</li>
+<div ng-show=" trm.advanceDeposit!=''">
+<li> 
+	<b>Payment of Deposit:</b> <p>That the Licensee/s has/have paid / shall pay the above mentioned deposit/premium as mentioned above by Cheque No.  <strong>{{trm.chequeNo=='' ?'---------':trm.chequeNo}} </strong> , dated - <strong>{{trm.dateOfCheque=='' ?'---------':trm.dateOfCheque}}</strong> , drawn on the Licensee’s Banking Account with <strong>{{trm.nameOfBank=='' ?'---------':trm.nameOfBank}}</strong> Bank, <strong>{{trm.branchName=='' ?'---------':trm.branchName}}</strong> Branch.</p>
+</li>
+</div>
+<li>
+	<b>Maintenance Charges:</b><p> That the all outgoings including all rates, taxes, levies, assessment, maintenance charges, non occupancy charges, etc. in respect of the said premises shall be paid by the Licensor.</p>
+</li>
+<li>
+	<b>Electricity Charges:</b><p> The licensee herein shall pay the electricity bills directly for energy consumed on the licensed premises and should submit original receipts to licensor indicating that the electricity bills are paid.</p>
+</li>
+<li><b>Use:</b> <p>That the Licensed premises shall only be used by the Licensee for <strong>{{trm.agreementType==null ?'-----------':trm.agreementType}}</strong> purpose. The Licensee shall maintain the said premises in its existing condition and damage, if any, caused to the said premises, the same shall be repaired by the Licensee at its own cost subject to normal wear and tear. The Licensee shall not do anything in the said premises which is or is likely to cause a nuisance to the other occupants of the said building or to the prejudice in any manner to the rights of Licensor in respect of said premises or shall not do any unlawful activities prohibited by State or Central Government.</p>
+</li>
+
+<li><b> Alteration:</b> <p>That the Licensee shall not make or permit to do any alteration or addition to the construction or arrangements (internal or external) to the Licensed premises without previous consent in writing from the Licensor.</p>
+</li>
+
+<li> <b>No Tenancy:</b> <p>That the Licensee shall not claim any tenancy right and shall not have any right to transfer, assign, and sublet or grant any license or sub-license in respect of the Licensed Premises or any part thereof and also shall not mortgage or raise any loan against the said premises.</p>
+</li>
+
+<li> 
+	<b>Inspection:</b> <p>That, the Licensor shall on reasonable notice given by the Licensor to the Licensee shall have a right of access either by himself or through authorized representative to enter, view and inspect the Licensed premises at reasonable intervals.
+	</p>
+</li>
+<li> 
+	<b>Cancellation:</b> <p>That, if the Licensee/s commit/s default in regular and punctual payments of monthly compensation as herein before mentioned or commit/s breach of any of the terms, covenants and conditions of this agreement or if any legislation prohibiting the Leave and Licence is imposed ,the Licensor/s shall be entitled to revoke and / or cancel the Licence hereby granted, by giving <strong>{{trm.lockInPeriod==null ?'-----------':trm.lockInPeriod}}</strong> months notice in writing and the Licensee/s too will have the right to vacate the said premises by giving a notice in writing of <strong>{{trm.lockInPeriod==null ?'-----------':trm.lockInPeriod}}</strong> month to the Licensor/s as mentioned earlier.</p>
+</li>
+
+<li> 
+	<b>Possession:</b> <p>That immediately upon the expiration or termination or cancellation of this agreement the Licensee shall vacate the said premises without delay with all his goods and belongings. In the event of the Licensee failing and / or neglecting to remove himself and / or his articles from the said premises on expiry or sooner determination of this Agreement, the Licensor shall be entitled to recover damages at the rate of double the daily amount of compensation per day and or alternatively the Licensor shall be entitled to remove the Licensee and his belongings from the Licensed premises, without recourse to the Court of Law.</p>
+</li>
+
+
+
+<li> <b>Miscellaneous:</b> 
+
+		<div ng-show=" mis.petAllowType!='DoNotSpecify'">
+		<p>The said premises is {{mis.petAllowType==null ?'-----------':mis.petAllowType}}</p>
+		</div>
+		
+		<div ng-show=" mis.miscellaneousTerms!=''">
+		<p>{{mis.miscellaneousTerms==null ?'-----------':mis.miscellaneousTerms}}</p>
+		</div>
+		
+		<div ng-show=" mis.furnitureAndAppliancesSelected"> 
+		<b>Furniture and Appliances:</b> <p>The said premises is having the Furniture and Appliances mentioned in the Schedule II. The licensee shall maintain the said Furniture and Appliances in the said premises in its existing condition and damage, if any, caused to the said Furniture and Appliances, the same shall be repaired by the Licensee/s at its own cost subject to normal wear and tear</p>
+		</div>
+	
+</li>
+
+<li> <b>Registration:</b> <p> This Agreement is to be registered and the expenditure of Stamp duty and registration fees and incidental charges, if any, shall be borne by the <strong>{{mis.regChargePaidByType==null ?'---------':mis.regChargePaidByType}}</strong>.
+</p></li>
+
+</ol>
+<h3 class="center" style="margin:40px 0;"> SCHEDULE I </h3>
+<p>(Being the correct description of premise <strong >{{prp.propertyType==null ?'-----------':prp.propertyType}}</strong> which is the subject matter of these presents)</p>
+<p>All that constructed portion being residential unit bearing <b>{{prp.propertyType==null ?'-----------':prp.propertyType}}</b> No. <b>{{prp.propertyNumber==null ?'-----------':prp.propertyNumber}}</b>, admeasuring about <b>{{prp.builtUpArea==null ?'-----------':prp.builtUpArea}}</b>. 
+built-up situate on the <b>{{prp.floorNo==null ?'-----------':prp.floorNo}}</b> Floor of a Building No. <b>{{prp.buildingNumber==null ?'-----------':prp.buildingNumber}}</b> known as <b>{{prp.buildingName==null ?'-----------':prp.buildingName}}</b> standing on the 
+said plot of land bearing <b>{{prp.propertyIdentityType==null ?'-----------':prp.propertyIdentityType}}</b>.No. <b>{{prp.propertyIdentity==null ?'-----------':prp.propertyIdentity}}</b>, Hissa No. -----------, of Village: {{prp.city==null ?'-----------':prp.city}}, situate within the revenue limits of 
+Tahasil <b>{{prp.tahasil==null ?'-----------':prp.tahasil}}</b> and Dist <b>{{prp.district==null ?'-----------':prp.district}}</b> and situate within the limits of <b>{{prp.municipal==null ?'-----------':prp.municipal}}</b>Municipal Corporation.
+and State <b>{{prp.state==null ?'-----------':prp.state}}</b> and Pin - <b>{{prp.pinCode==null ?'-----------':prp.pinCode}}</b></p>
+<br>
+<br>
+<br>
+
+<p style="page-break-after:always;">
+IN WITNESS WHEREOF the parties hereto have set and subscribed their respective signatures by way of putting thumb impression electronic signature hereto in the presence of witness, who are identifying the executants, on the day, month and year first above written.
+</p>
+
+<h3 class="center" style="margin:20px 0;"> SCHEDULE II</h3>
+<p>(Being the correct description of Furniture and Appliances in the premise)</p>
+
+<div ng-show=" mis.furnitureAndAppliancesSelected"> 
+<table class="nbTable" style="page-break-after:always;">
+	<tbody><tr>
+		<th>Sr No.</th>
+		<th>Item</th>
+		<th>Number of Units</th>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td>Fan</td>
+		<td><strong>{{mis.fans==null ?'0':mis.fans}}</strong></td>
+	</tr>
+	<tr>
+		<td>2</td>
+		<td>Tube Light</td>
+		<td><strong>{{mis.tubeLight==null ?'0':mis.tubeLight}}</strong></td>
+	</tr>
+	<tr>
+		<td>3</td>
+		<td>Bed</td>
+		<td><strong>{{mis.bed==null ?'0':mis.bed}}</strong></td>
+	</tr>
+	<tr>
+		<td>4</td>
+		<td>Sofa	</td>
+		<td><strong>{{mis.sofa==null ?'0':mis.sofa}}</strong></td>
+	</tr>
+	<tr>
+		<td>5</td>
+		<td>Table</td>
+		<td><strong>{{mis.table==null ?'0':mis.table}}</strong></td>
+	</tr>
+	<tr>
+		<td>6</td>
+		<td>Chair</td>
+		<td><strong>{{mis.chair==null ?'0':mis.chair}}</strong></td>
+	</tr>
+	<tr>
+		<td>7</td>
+		<td>Air Conditioner</td>
+		<td><strong>{{mis.airConditioner==null ?'0':mis.airConditioner}}</strong></td>
+	</tr>
+	<tr>
+		<td>8</td>
+		<td>Geyser</td>
+		<td><strong>{{mis.geyser==null ?'0':mis.geyser}}</strong></td>
+	</tr>
+</tbody></table>
+</div>
+<!-- pagebreak -->
+<div>
+
+<div>{{agreement.owners.length == 0 ? '-----------------------------------------------Owners Name-----------------------------------------------' :''}}</div>
+<div ng-repeat="owner in agreement.owners">
+<div><p>Owner Name: {{owner.personName}}</p></div>
+<div><p>signature</p></div>
+</div>
+
+<div>{{agreement.tenants.length == 0 ? '-----------------------------------------------Tenant Name-----------------------------------------------' :''}}</div>
+<div ng-repeat="tenant in agreement.tenants">
+<div><p>Tenant Name: {{tenant.personName}}</p></div>
+<div><p>signature</p></div>
+</div>
+
+<div>{{agreement.witnesses.length == 0 ? '-----------------------------------------------Witnesses Details-----------------------------------------------' :''}}</div>
+<div ng-repeat="witness in agreement.witnesses">
+<div><p>Witness Name: {{witness.personName}}</p></div>
+<div><p>Witness Address: {{witness.contectAddress}}</p></div>
+<div><p>Witness UID: {{witness.aadharUid}}</p></div>
+<div><p>signature</p></div>
+</div>
+
+</div>
+	<center class="draftNote"><h1>Draft Version</h1><p><i>* Some details may be changed to suit the Maharashtra government format</i></p> </center>
+	</md-card-content>
+    </md-card>
+</div>
+<!-- End  --> 
+<div id="loaders" layout="row" layout-align="center center">
+    <md-progress-circular md-mode="indeterminate"  ng-show=loading></md-progress-circular>
+ </div>

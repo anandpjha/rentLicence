@@ -1,0 +1,92 @@
+<h3 align="center" ng-style="{'color': 'rgba(255, 0, 0, 1)'}">{{loginUser.errorMessage}}</h3>
+<div flex layout="row" layout-md="column" layout-sm="column" layout-align="center center"> 
+<form name="loginUserForm" ng-submit="submitloginUser()" ng-show="true"	ng-cloak>
+	<div class="table-responsive-vertical shadow-z-1" layout-align=""> 
+			<md-toolbar class="md-theme-light" >
+			<h4 class="md-toolbar-tools" layout="row" layout-align="center center">
+				<span>Please enter your credential to SIGN-IN</span>
+			</h4>
+			</md-toolbar> 
+			
+ 
+  <table id="table" class="table table-hover table-mc-light-blue">
+      <tbody>
+        
+		<tr>
+          <td  style="text-align: center;" colspan="2" data-title="" layout-align="center center"> 
+		  
+		  	<div flex>
+				<md-input-container> <label>Email
+					Address</label> <input type="userEmail" name="userEmail" id="userEmail"
+					ng-model="login.userEmail" ng-required="true"
+					ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/">
+				<div ng-messages="loginForm.email.$error.required">
+					<div ng-message="required">Email address is required.</div>
+					<span ng-show="loginForm.email.$error.emailAddress">This is not a
+						valid email.</span>
+				</div>
+			</md-input-container>
+		  </td>
+        </tr>
+		<tr>
+          <td style="text-align: center;" colspan="2" data-title="" layout-align="center center">
+		  <div flex>
+				<md-input-container> <label>Password</label>
+				<input type="password" name="userPassword" id="userPassword" ng-model="login.userPassword"
+					ng-required="true">
+				<div ng-messages="loginForm.Password.$error">
+					<div ng-message="required">Password is required.</div>
+				</div>
+				</md-input-container>
+		  </td>
+        </tr>
+        <tr>
+          <td style="text-align: center;" colspan="2" data-title="" layout-align="center center">
+		    <div flex>
+				<md-input-container class="md-block" flex-gt-sm>
+		        <label>User Type</label>
+		        <md-select name="userType" ng-model="login.userType" ng-required="true">
+      							<md-option value="Associate">Associate</md-option>
+							<md-option value="Admin">Admin</md-option>
+   							 </md-select>
+   							 <div ng-messages="loginForm.agreementType.$error">
+					<div ng-message="required">User Type is required.</div>
+				 </div>
+		        </md-input-container> 
+			</div>
+		  </td>
+        </tr>
+        <tr>
+          <td style="text-align: center;" colspan="2" data-title="" layout-align="center center">
+		  <div flex>
+				<md-button type="submit" class="md-raised md-button md-ink-ripple"
+					ng-disabled="loginForm.$invalid">LOGIN</md-button>
+			</div>
+		  </td>
+        </tr>
+		<tr>
+          <td colspan="2" data-title="" layout-align="center center">
+		  <div flex>
+			<md-checkbox ng-model="isRememberMe" aria-label="isRememberMe" class="md-warn md-align-top-left" >
+				Remember me
+			</md-checkbox>
+		</div>	
+		  </td>
+        </tr>
+		
+		<tr>
+          <td colspan="2" data-title="" layout-align="center center">
+			<div flex>
+			NEW TO NAMAMI, <a href="register"><b>SIGN UP</b></a> <br>
+			Forgot your password?<a href="reset"><b>Reset Here</b></a>
+			</div> 
+		</td>
+        </tr>
+      </tbody>
+    </table>
+</form>
+<div id="loaders" layout="row" layout-align="center center">
+    <md-progress-circular md-mode="indeterminate"  ng-show=loading></md-progress-circular>
+ </div>
+	</div>
+</div>

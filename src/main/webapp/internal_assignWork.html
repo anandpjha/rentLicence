@@ -1,0 +1,87 @@
+<h3 align="center" ng-style="{'color': 'rgba(255, 0, 0, 1)'}">{{assignWork_errorMessage}}</h3>
+<h3 align="center" ng-style="{'color': 'rgba(255, 0, 0, 1)'}">{{assignWork_successMessage}}</h3>
+<div flex layout="row" layout-md="column" layout-sm="column" layout-align="center center"> 
+<form name="assignWorkForm" ng-submit="submitAssignWorkForm()" ng-show="true"	ng-cloak>
+	<div class="table-responsive-vertical shadow-z-1" layout-align=""> 
+			<md-toolbar class="md-theme-light" >
+			<h4 class="md-toolbar-tools" layout="row" layout-align="center center">
+				<span>Please select associate to assign an Agreement</span>
+			</h4>
+			</md-toolbar> 
+			
+ 
+  <table id="table" class="table table-hover table-mc-light-blue">
+      <tbody>
+        
+		<tr>
+		<!-- ng-repeat="agreements in unassignagreements" -->
+          <td  style="text-align: center;"  data-title="" layout-align="center center"> 
+		  
+		  	<div flex>
+				
+			   <!-- <md-input-container>
+  					<md-select ng-model="assignWork.agreementId" placeholder="Select an Agreement" ng-required="true" type="number">
+    					<md-option value= {{ agreementId }} ng-repeat="agreementId in unassignagreements">{{ agreementId }}</md-option>
+  					</md-select>
+  				<div ng-messages="assignWorkForm.agreementId.$error.required">	
+				</md-input-container> -->
+				<md-input-container class="md-block" flex-gt-sm>
+                                        <label>Select an Agreement</label>
+                                        <md-select ng-model="assignWork.agreementId" type="number">
+                                            <md-option ng-repeat="agreementId in unassignagreements" value={{agreementId}} >
+                                                {{agreementId}}
+                                            </md-option>
+                                        </md-select>
+                                        <div ng-messages="assignWorkForm.agreementId.$error">
+                                            <div ng-message="required">agreementId is required.</div>
+                                        </div>
+                 </md-input-container>
+			 </div>
+		  </td>
+		  <td  style="text-align: center;"  data-title="" layout-align="center center"> 
+		  
+		  	<div flex>
+				
+			  <!--  <md-input-container>
+  					<md-select ng-model="assignWork.associateId" placeholder="Select an Associate" ng-required="true" type="number">
+    					<md-option value= {{ associateId }} ng-repeat="associateId in associates">{{ associateId }}</md-option>
+  					</md-select>
+  				<div ng-messages="assignWorkForm.associateId.$error.required">	
+				</md-input-container> -->
+				<md-input-container class="md-block" flex-gt-sm>
+                                        <label>Select an Associate</label>
+                                        <md-select ng-model="assignWork.associateId" >
+                                            <md-option ng-repeat="associateId in associates" value={{associateId}} >
+                                                {{associateId}}
+                                            </md-option>
+                                        </md-select>
+                                        <div ng-messages="assignWorkForm.associateId.$error">
+                                            <div ng-message="required">associateId is required.</div>
+                                        </div>
+                 </md-input-container>
+			 </div>
+		  </td>
+		   
+		  
+        </tr>
+		
+       
+        <tr>
+          <td style="text-align: center;" colspan="2" data-title="" layout-align="center center">
+		  <div flex>
+				<md-button type="submit" class="md-raised md-button md-ink-ripple"
+					ng-disabled="assignWorkForm.$invalid">ASSIGN WORK</md-button>
+			</div>
+		  </td>
+        </tr>
+		
+		
+		
+      </tbody>
+    </table>
+</form>
+<div id="loaders" layout="row" layout-align="center center">
+    <md-progress-circular md-mode="indeterminate"  ng-show=loading></md-progress-circular>
+ </div>
+	</div>
+</div>

@@ -1,0 +1,203 @@
+<div overflow = "scroll";>
+    <!-- <center><img src="/static/img/rentalAgreementStamp2.jpg" height="250"></center> -->
+    <!-- <div  style="height:500px;"></div> -->
+    <md-card>
+    <md-card-content style=" height: 750px; overflow: scroll;">
+    <h3 align="center">LEAVE AND LICENCE AGREEMENT</h3>
+	
+	<p style="text-align:center;">This agreement is made and executed on <strong >{{trm.agreementStartDate==null ?'---------':trm.agreementStartDate}}</strong> at <strong >{{trm.agreementCity== null ? '----------':trm.agreementCity}}</strong>. </p><h3 style="text-align:center;">BETWEEN</h3>
+	<div>{{agreement.owners.length == 0 ? '-----------------------------------------------Owners details-----------------------------------------------' :''}}</div>
+	<div ng-repeat="owner in agreement.owners">
+		<p>
+   	 	<strong >{{owner.personName}} </strong> , Age: <strong >{{owner.personAge}} </strong> About  Years , Occupation: <strong >{{owner.occupation}} </strong> ,having contact number <strong >{{owner.mobNumber}} </strong> . Residing at: <strong >{{owner.contectAddress}} </strong>.
+   	 	</p>
+   	 	<p>PAN: <strong >{{owner.panNo}}</strong> UID:<strong >{{owner.aadharUid}}</strong></p>
+    </div>
+    <p>HEREINAFTER called 'the Licensor' (which expression shall mean and include the Licensor above named and also his respective heirs, successors, assigns, executors and administrators)</p>
+	
+	<p></p>
+
+	<h3 class="center" style="margin:10px 0;"> AND </h3>
+	<p><div>{{agreement.tenants.length == 0 ? '-----------------------------------------------Tenants details-----------------------------------------------' :''}}</div>
+        </p><div ng-repeat="tenant in agreement.tenants">
+		<p>
+   	 	<strong >{{tenant.personName}} </strong> , Age: <strong >{{tenant.personAge}} </strong> About  Years , Occupation: <strong >{{tenant.occupation}} </strong> ,having contact number <strong >{{tenant.mobNumber}} </strong> . Residing at: <strong >{{tenant.contectAddress}} </strong>.
+   	 	</p>
+   	 	<p>PAN: <strong >{{tenant.panNo}}</strong> UID:<strong >{{tenant.aadharUid}}</strong></p>
+    </div>
+    <p>HEREINAFTER called 'the Licensee' (which expression shall mean and include only Licensee above named).</p>
+    <p></p>
+<br>
+	<p>WHEREAS the Licensor/s is/are absolutely seized and possessed of and or otherwise well and sufficiently entitled to all that constructed portion being unit described in Schedule hereunder written and are hereafter for the sake of brevity called or referred to as Licensed Premises and is/are desirous of giving the said premises on Leave and Licence.</p>
+<br>
+	<p>AND WHEREAS the Licensee/s herein is/are in need of temporary premises for his/her/their <strong>{{trm.agreementType==null ?'-----------':trm.agreementType}}</strong> use has/have approached the Licensor/s with a request to allow the Licensee/s herein to use and occupy the said premises on Leave and License basis for a period of <strong>  {{trm.agreementPeriodInMonths==null ?'---------':trm.agreementPeriodInMonths}} Months </strong> commencing
+	from <strong>{{trm.agreementStartDate==null ?'---------':trm.agreementStartDate}}</strong> and ending on <strong>{{trm.agreementEndDate==null ?'---------':trm.agreementEndDate}}</strong>, on terms and subject to conditions hereafter appearing.</p>
+<br>
+	<p> AND WHEREAS the Licensor/s has/have agreed to allow the Licensee/s herein to use and occupy the said Licenced premises for his/her/their aforesaid
+	 <strong>{{trm.agreementType==null ?'-----------':trm.agreementType}}</strong> purposes only, on Leave and License basis for above mentioned period ,on terms and subject to conditions hereafter appearing;</p>
+<br>
+<h4 style="margin:10px 0;">
+NOW THEREFORE IT IS HEREBY AGREED TO, DECLARED AND RECORDED BY AND BETWEEN THE PARTIES HERETO AS FOLLOWS:-</h4>
+<ol style="page-break-after:always;">
+<li> <b>Period:</b> <p>That the Licensor hereby grants to the Licensee herein a revocable leave and license, to occupy the Licensed Premises, described in Schedule I hereunder written without creating any tenancy rights or any other rights, title and interest in favour of the Licensee for a period of <strong>{{trm.agreementPeriodInMonths==null ?'---------':trm.agreementPeriodInMonths}} Months</strong> commencing from <strong >{{trm.agreementStartDate==null ?'---------':trm.agreementStartDate}}</strong> and ending on <strong>{{trm.agreementEndDate==null ?'---------':trm.agreementEndDate}}</strong>. 
+</p>
+</li>
+<li> 
+	<div><b>Rent and Deposit:</b></div>
+			<div ng-show="trm.advanceDeposit=='' ">
+			
+			<p>That the Licensee/s shall pay to the Licensor/s <strong> Rs. {{trm.rentPerMonth==null ?'---------':trm.rentPerMonth}}</strong> per month towards the compensation for the use of the said Licenced premises. This amount shall be payable within first five days of the concerned month of Leave and Licence</p>
+			</div>
+			<div ng-show=" trm.advanceDeposit!=''">
+			<p> That the Licensee/s shall pay to the Licensor/s <strong> Rs. {{trm.rentPerMonth==null ?'---------':trm.rentPerMonth}}</strong> Per month towards the compensation and <strong >Rs. {{trm.advanceDeposit=='' ?'---------':trm.advanceDeposit}}</strong> Interest free <strong >{{trm.isRefundable==true ?'Non-Refundable':'Refundable'}}</strong> deposit, for the use of the said licensed premises. The amount of monthly compensation shall be payable within first five days of the concerned month of Leave and Licence.</p>
+			</div>
+</li>
+<div ng-show=" trm.advanceDeposit!=''">
+<li> 
+	<b>Payment of Deposit:</b> <p>That the Licensee/s has/have paid / shall pay the above mentioned deposit/premium as mentioned above by Cheque No.  <strong>{{trm.chequeNo=='' ?'---------':trm.chequeNo}} </strong> , dated - <strong>{{trm.dateOfCheque=='' ?'---------':trm.dateOfCheque}}</strong> , drawn on the Licensee’s Banking Account with <strong>{{trm.nameOfBank=='' ?'---------':trm.nameOfBank}}</strong> Bank, <strong>{{trm.branchName=='' ?'---------':trm.branchName}}</strong> Branch.</p>
+</li>
+</div>
+<li>
+	<b>Maintenance Charges:</b><p> That the all outgoings including all rates, taxes, levies, assessment, maintenance charges, non occupancy charges, etc. in respect of the said premises shall be paid by the Licensor.</p>
+</li>
+<li>
+	<b>Electricity Charges:</b><p> The licensee herein shall pay the electricity bills directly for energy consumed on the licensed premises and should submit original receipts to licensor indicating that the electricity bills are paid.</p>
+</li>
+<li><b>Use:</b> <p>That the Licensed premises shall only be used by the Licensee for <strong>{{trm.agreementType==null ?'-----------':trm.agreementType}}</strong> purpose. The Licensee shall maintain the said premises in its existing condition and damage, if any, caused to the said premises, the same shall be repaired by the Licensee at its own cost subject to normal wear and tear. The Licensee shall not do anything in the said premises which is or is likely to cause a nuisance to the other occupants of the said building or to the prejudice in any manner to the rights of Licensor in respect of said premises or shall not do any unlawful activities prohibited by State or Central Government.</p>
+</li>
+
+<li><b> Alteration:</b> <p>That the Licensee shall not make or permit to do any alteration or addition to the construction or arrangements (internal or external) to the Licensed premises without previous consent in writing from the Licensor.</p>
+</li>
+
+<li> <b>No Tenancy:</b> <p>That the Licensee shall not claim any tenancy right and shall not have any right to transfer, assign, and sublet or grant any license or sub-license in respect of the Licensed Premises or any part thereof and also shall not mortgage or raise any loan against the said premises.</p>
+</li>
+
+<li> 
+	<b>Inspection:</b> <p>That, the Licensor shall on reasonable notice given by the Licensor to the Licensee shall have a right of access either by himself or through authorized representative to enter, view and inspect the Licensed premises at reasonable intervals.
+	</p>
+</li>
+<li> 
+	<b>Cancellation:</b> <p>That, if the Licensee/s commit/s default in regular and punctual payments of monthly compensation as herein before mentioned or commit/s breach of any of the terms, covenants and conditions of this agreement or if any legislation prohibiting the Leave and Licence is imposed ,the Licensor/s shall be entitled to revoke and / or cancel the Licence hereby granted, by giving <strong>{{trm.lockInPeriod==null ?'-----------':trm.lockInPeriod}}</strong> months notice in writing and the Licensee/s too will have the right to vacate the said premises by giving a notice in writing of <strong>{{trm.lockInPeriod==null ?'-----------':trm.lockInPeriod}}</strong> month to the Licensor/s as mentioned earlier.</p>
+</li>
+
+<li> 
+	<b>Possession:</b> <p>That immediately upon the expiration or termination or cancellation of this agreement the Licensee shall vacate the said premises without delay with all his goods and belongings. In the event of the Licensee failing and / or neglecting to remove himself and / or his articles from the said premises on expiry or sooner determination of this Agreement, the Licensor shall be entitled to recover damages at the rate of double the daily amount of compensation per day and or alternatively the Licensor shall be entitled to remove the Licensee and his belongings from the Licensed premises, without recourse to the Court of Law.</p>
+</li>
+
+
+
+<li> <b>Miscellaneous:</b> 
+
+		<div ng-show=" mis.petAllowType!='DoNotSpecify'">
+		<p>The said premises is {{mis.petAllowType==null ?'-----------':mis.petAllowType}}</p>
+		</div>
+		
+		<div ng-show=" mis.miscellaneousTerms!=''">
+		<p>{{mis.miscellaneousTerms==null ?'-----------':mis.miscellaneousTerms}}</p>
+		</div>
+		
+		<div ng-show=" mis.furnitureAndAppliancesSelected"> 
+		<b>Furniture and Appliances:</b> <p>The said premises is having the Furniture and Appliances mentioned in the Schedule II. The licensee shall maintain the said Furniture and Appliances in the said premises in its existing condition and damage, if any, caused to the said Furniture and Appliances, the same shall be repaired by the Licensee/s at its own cost subject to normal wear and tear</p>
+		</div>
+	
+</li>
+
+<li> <b>Registration:</b> <p> This Agreement is to be registered and the expenditure of Stamp duty and registration fees and incidental charges, if any, shall be borne by the <strong>{{mis.regChargePaidByType==null ?'---------':mis.regChargePaidByType}}</strong>.
+</p></li>
+
+</ol>
+<h3 class="center" style="margin:40px 0;"> SCHEDULE I </h3>
+<p>(Being the correct description of premise <strong >{{prp.propertyType==null ?'-----------':prp.propertyType}}</strong> which is the subject matter of these presents)</p>
+<p>All that constructed portion being residential unit bearing <b>{{prp.propertyType==null ?'-----------':prp.propertyType}}</b> No. <b>{{prp.propertyNumber==null ?'-----------':prp.propertyNumber}}</b>, admeasuring about <b>{{prp.builtUpArea==null ?'-----------':prp.builtUpArea}}</b>. 
+built-up situate on the <b>{{prp.floorNo==null ?'-----------':prp.floorNo}}</b> Floor of a Building No. <b>{{prp.buildingNumber==null ?'-----------':prp.buildingNumber}}</b> known as <b>{{prp.buildingName==null ?'-----------':prp.buildingName}}</b> standing on the 
+said plot of land bearing <b>{{prp.propertyIdentityType==null ?'-----------':prp.propertyIdentityType}}</b>.No. <b>{{prp.propertyIdentity==null ?'-----------':prp.propertyIdentity}}</b>, Hissa No. -----------, of Village: {{prp.city==null ?'-----------':prp.city}}, situate within the revenue limits of 
+Tahasil <b>{{prp.tahasil==null ?'-----------':prp.tahasil}}</b> and Dist <b>{{prp.district==null ?'-----------':prp.district}}</b> and situate within the limits of <b>{{prp.municipal==null ?'-----------':prp.municipal}}</b>Municipal Corporation.
+and State <b>{{prp.state==null ?'-----------':prp.state}}</b> and Pin - <b>{{prp.pinCode==null ?'-----------':prp.pinCode}}</b></p>
+<br>
+<br>
+<br>
+
+<p style="page-break-after:always;">
+IN WITNESS WHEREOF the parties hereto have set and subscribed their respective signatures by way of putting thumb impression electronic signature hereto in the presence of witness, who are identifying the executants, on the day, month and year first above written.
+</p>
+
+<h3 class="center" style="margin:20px 0;"> SCHEDULE II</h3>
+<p>(Being the correct description of Furniture and Appliances in the premise)</p>
+
+<div ng-show=" mis.furnitureAndAppliancesSelected"> 
+<table class="nbTable" style="page-break-after:always;">
+	<tbody><tr>
+		<th>Sr No.</th>
+		<th>Item</th>
+		<th>Number of Units</th>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td>Fan</td>
+		<td><strong>{{mis.fans==null ?'0':mis.fans}}</strong></td>
+	</tr>
+	<tr>
+		<td>2</td>
+		<td>Tube Light</td>
+		<td><strong>{{mis.tubeLight==null ?'0':mis.tubeLight}}</strong></td>
+	</tr>
+	<tr>
+		<td>3</td>
+		<td>Bed</td>
+		<td><strong>{{mis.bed==null ?'0':mis.bed}}</strong></td>
+	</tr>
+	<tr>
+		<td>4</td>
+		<td>Sofa	</td>
+		<td><strong>{{mis.sofa==null ?'0':mis.sofa}}</strong></td>
+	</tr>
+	<tr>
+		<td>5</td>
+		<td>Table</td>
+		<td><strong>{{mis.table==null ?'0':mis.table}}</strong></td>
+	</tr>
+	<tr>
+		<td>6</td>
+		<td>Chair</td>
+		<td><strong>{{mis.chair==null ?'0':mis.chair}}</strong></td>
+	</tr>
+	<tr>
+		<td>7</td>
+		<td>Air Conditioner</td>
+		<td><strong>{{mis.airConditioner==null ?'0':mis.airConditioner}}</strong></td>
+	</tr>
+	<tr>
+		<td>8</td>
+		<td>Geyser</td>
+		<td><strong>{{mis.geyser==null ?'0':mis.geyser}}</strong></td>
+	</tr>
+</tbody></table>
+</div>
+<!-- pagebreak -->
+<div>
+
+<div>{{agreement.owners.length == 0 ? '-----------------------------------------------Owners Name-----------------------------------------------' :''}}</div>
+<div ng-repeat="owner in agreement.owners">
+<div><p>Owner Name: {{owner.personName}}</p></div>
+<div><p>signature</p></div>
+</div>
+
+<div>{{agreement.tenants.length == 0 ? '-----------------------------------------------Tenant Name-----------------------------------------------' :''}}</div>
+<div ng-repeat="tenant in agreement.tenants">
+<div><p>Tenant Name: {{tenant.personName}}</p></div>
+<div><p>signature</p></div>
+</div>
+
+<div>{{agreement.witnesses.length == 0 ? '-----------------------------------------------Witnesses Details-----------------------------------------------' :''}}</div>
+<div ng-repeat="witness in agreement.witnesses">
+<div><p>Witness Name: {{witness.personName}}</p></div>
+<div><p>Witness Address: {{witness.contectAddress}}</p></div>
+<div><p>Witness UID: {{witness.aadharUid}}</p></div>
+<div><p>signature</p></div>
+</div>
+
+</div>
+	<center class="draftNote"><h1>Draft Version</h1><p><i>* Some details may be changed to suit the Maharashtra government format</i></p> </center>
+	</md-card-content>
+    </md-card>
+</div>

@@ -1,0 +1,66 @@
+
+
+<h3 align="center">{{errorStatus}}<h3>
+
+<div  layout-align="space-between center"> 
+
+
+<div class="table-responsive-vertical shadow-z-1" style="margin: 10px auto; text-align: center;" > 
+<md-toolbar class="md-theme-light" >
+    <h2 class="md-toolbar-tools" layout="row" layout-align="center center">
+      <span>Your Agreements Details</span>
+    </h2>
+  </md-toolbar>
+  
+
+  <!-- Table starts here -->
+  <table ng-show = "listdata.length > 0" id="table" class="table table-hover table-mc-light-blue" >
+      <thead>
+        <tr>
+          <th layout-align="center center"># No </th>
+          <th layout-align="center center">Rent</th>
+		  <th layout-align="center center">Deposit</th>
+		  <th layout-align="center center">Start Date</th>
+		  <th layout-align="center center">Status</th>
+		  <th layout-align="center center">Progress</th>
+		  <th layout-align="center center"></th>
+		  <th layout-align="center center"></th>		 
+		  <th layout-align="center center"></th>
+        </tr>
+      </thead>
+      <tbody>
+
+
+        
+        <tr ng-repeat="data in listdata">
+          <td data-title="Unique No: "><a href="#">     {{data.agreementId}}</a></td>
+          <td data-title="Rent: ">{{data.rentPerMonth}}</td>
+          <td data-title="Deposit: ">{{data.advanceDeposit==null ?'NA':data.advanceDeposit}}</td>
+          <td data-title="Start Date: ">{{data.agreementStartDate | date: 'dd-MMM-yyyy'}}</td>
+          <td data-title="Status: ">{{data.agreementStatus}}</td>
+          <td data-title="Progress: "><md-button class="md-primary" ng-click="showProgress($event, data)" layout-align="center center">{{data.calculatedData.agreementPercentageDone}} %</md-button></td>
+          <td><md-button class="md-primary" ng-href="newagreement/{{data.agreementId}}" ng-disabled = "data.agreementTrackerStatus.agreement_all_req_data_added" layout-align="center center">EDIT</md-button></td>
+          <div>
+	          <td  ng-show="data.agreementStatus!='INPUTS IN PROGRESS'"><md-button class="md-primary" ng-disabled = "data.agreementTrackerStatus.usr_pyment_done" ng-href="proceedPayment/{{data.agreementId}}" layout-align="center center">{{data.agreementTrackerStatus.usr_pyment_done!=true ?'Pay ':'Payment Done'}} &#8377; {{data.calculatedData.agreementTotalCost}}</md-button></td>
+	          <td  ng-show="data.agreementStatus!='INPUTS IN PROGRESS'"><md-button class="md-primary" ng-click="viewAgreementDraft($event, data)" layout-align="center center">View</md-button></td>
+	          <td  ng-show="data.agreementStatus!='INPUTS IN PROGRESS'"><md-button class="md-primary" ng-click="downloadPdf(data.agreementId)" layout-align="center center">DOWNLOAD</md-button></td>
+          </div>
+        </tr>
+		
+      </tbody>
+    </table>
+    
+    
+    
+     
+	</div>
+	</div>
+ 
+ <div> &nbsp</div>
+
+</div>
+<div>&nbsp;&nbsp;</div>
+</br>
+</br>
+ <div ng-show = "listdata.length == 0"><h3 align="center" >You didn&#39;t yet created any Agreement, Please <a href="newagreement" >click here</a> to experience amazing way!!!<h3></div>
+
