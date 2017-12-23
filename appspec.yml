@@ -1,7 +1,7 @@
 version: 0.0
 os: linux
 files:
-  - source: target/ROOT.war
+  - source: target/rentagreement-1.0.war
     destination: /home/ec2-user/javaapp
 hooks:
   AfterInstall:
