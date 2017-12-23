@@ -5,5 +5,5 @@ mkdir /opt/tomcat
 tar xvf apache-tomcat-8*tar.gz -C /opt/tomcat --strip-components=1
 cd /opt/tomcat
 sed -i 's|port="8080"|port="80"|g' conf/server.xml
-rm -rf webapps/ROOT
-mv /home/ec2-user/javaapp/ROOT.war webapps/
+rm -rf webapps/rentagreement-1.0
+mv /home/ec2-user/javaapp/rentagreement-1.0.war webapps/
