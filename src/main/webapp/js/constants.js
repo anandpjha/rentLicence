@@ -4,10 +4,10 @@ angular.module('constants', [])
 	 //var DOMAIN = 'http://localhost:8080/rentlicence/api/v1';
 	 //var DOMAIN = 'http://rentagreement-builderhub.rhcloud.com/api/v1';
 	 //var DOMAIN = 'https://localhost:8443/rentlicence/api/v1';
-	var DOMAIN = 'https://rentagreement-builderhub.rhcloud.com/api/v1';
+	var DOMAIN = 'http://localhost:8080/rentagreement-1.0/api/v1';
 	 //var DOMAIN_UI = 'http://agreementui-builderhub.rhcloud.com/'
 	 //var DOMAIN_UI = 'https://localhost:8443/rentlicence/';
-	var DOMAIN_UI = 'https://rentagreement-builderhub.rhcloud.com/';
+	var DOMAIN_UI = 'http://localhost:8080/rentagreement-1.0/';
 	//var DOMAIN_UI = 'http://localhost:8080/rentagreement/gui/';
 	//var DOMAIN_UI = 'http://rentagreement-builderhub.rhcloud.com/gui/';
 	  

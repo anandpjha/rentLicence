@@ -7,42 +7,42 @@ app.config([
 		'$mdThemingProvider',
 		function($routeProvider, $locationProvider, $mdThemingProvider) {
 			$routeProvider.when('/login', {
-				templateUrl : '/login.html',
+				templateUrl : '/rentagreement-1.0/login.html',
 				controller : 'loginCtr'
 			}).when('/dashboard', {
-				templateUrl : '/newDashboard.html',
+				templateUrl : '/rentagreement-1.0/newDashboard.html',
 				controller : 'dashboardCtr'
 			}).when('/register', {
-				templateUrl : '/registerUser.html',
+				templateUrl : '/rentagreement-1.0/registerUser.html',
 				controller : 'regUserCtr'
 			}).when('/newagreement', {
-				templateUrl : '/newAgreement.html',
+				templateUrl : '/rentagreement-1.0/newAgreement.html',
 				controller : 'newAgreementCtr'
 			}).when('/newagreement/:agreementid', {
 				// templateUrl: function(params){ return
 				// '/newAgreement.html?agreementId=' + params.agreementid; },
-				templateUrl : '/newAgreement.html',
+				templateUrl : '/rentagreement-1.0/newAgreement.html',
 				controller : 'newAgreementCtr'
 			}).when('/proceedPayment/:agreementid', {
-				templateUrl : '/proceedPayment.html',
+				templateUrl : '/rentagreement-1.0/proceedPayment.html',
 				controller : 'paymentCtr'
 			}).when('/start.html', {
-				templateUrl : '/registerAndLoginUser.html',
+				templateUrl : '/rentagreement-1.0/registerAndLoginUser.html',
 				controller : 'regUserLoginUserCtr'
 			}).when('/profile', {
-				templateUrl : '/profile.html',
+				templateUrl : '/rentagreement-1.0/profile.html',
 				controller : 'profileCtr'
 			}).when('/logout', {
-				templateUrl : '/logout.html',
+				templateUrl : '/rentagreement-1.0/logout.html',
 				controller : 'logoutCtr'
 			}).when('/reset', {
-				templateUrl : '/resetPassword.html',
+				templateUrl : '/rentagreement-1.0/resetPassword.html',
 				controller : 'resetPasswordCtr'
 			}).when('/index.html', {
-				templateUrl : '/index.html',
+				templateUrl : '/rentagreement-1.0/index.html',
 				controller : 'resetPasswordCtr'
 			}).otherwise({
-				templateUrl : '/logout.html',
+				templateUrl : '/rentagreement-1.0/logout.html',
 				controller : 'logoutCtr'
 			});
 

@@ -25,4 +25,4 @@ artifacts:
     - 'appspec.yml'
     - 'scripts/start_server'
     - 'scripts/install_dependencies'
-    - 'target/ROOT.war'
+    - 'target/rentagreement-1.0.war'
