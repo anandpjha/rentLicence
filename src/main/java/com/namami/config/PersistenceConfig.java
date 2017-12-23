@@ -5,7 +5,7 @@ import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
-import org.apache.commons.dbcp.BasicDataSource;
+//import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -27,6 +27,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableJpaRepositories(basePackages="com.namami.repositories")
 public class PersistenceConfig 
 {
+/*
 	@Autowired
 	private Environment env;
 
@@ -45,6 +46,7 @@ public class PersistenceConfig
 	{
 		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
 
+*/
 /*		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		vendorAdapter.setGenerateDdl(Boolean.TRUE);
 		vendorAdapter.setShowSql(Boolean.TRUE);
@@ -53,17 +55,20 @@ public class PersistenceConfig
 		jpaProperties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
 		factory.setJpaProperties(jpaProperties);
 		
-*/
+*//*
+
 		
 		OpenJpaVendorAdapter vendorAdapter = new OpenJpaVendorAdapter();
 		vendorAdapter.setGenerateDdl(Boolean.TRUE);
 		vendorAdapter.setShowSql(Boolean.TRUE);
 
-		/*try {
+		*/
+/*try {
 			Class.forName(env.getProperty("openjpa.RuntimeUnenhancedClasses"));
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-		}*/
+		}*//*
+
 		Properties jpaProperties = new Properties();
 		//jpaProperties.put("openjpa.Log", env.getProperty("openjpa.Log"));
 		jpaProperties.put("openjpa.RuntimeUnenhancedClasses", env.getProperty("openjpa.RuntimeUnenhancedClasses"));
@@ -78,11 +83,13 @@ public class PersistenceConfig
 		return factory;
 	}
 
+*/
 /*	@Bean
 	public HibernateExceptionTranslator hibernateExceptionTranslator()
 	{
 		return new HibernateExceptionTranslator();
-	}*/
+	}*//*
+
 	
 	@Bean
 	public DataSource dataSource()
@@ -107,7 +114,8 @@ public class PersistenceConfig
 		return dataSourceInitializer;
 	}	
 	
-	/*
+	*/
+/*
 	// For H2 web server
 	@Bean(name = "h2WebServer", initMethod="start", destroyMethod="stop")
 	public org.h2.tools.Server h2WebServer() throws SQLException {
@@ -120,8 +128,10 @@ public class PersistenceConfig
 	public org.h2.tools.Server h2Server() throws SQLException {
 	   return org.h2.tools.Server.createTcpServer("-tcp", "-tcpAllowOthers", "-tcpPort", "9092");
 	}
-	*/
+	*//*
+
 	
 	// For H2 web server end
-	 	
+*/
+
 }

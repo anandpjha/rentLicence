@@ -37,7 +37,7 @@ public class Locator extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	private LocatorTypeValues locatorType;
 	
-	private Integer personId;
+	/*private Integer personId;
 	
 
 	public Integer getPersonId() {
@@ -46,7 +46,7 @@ public class Locator extends BaseEntity {
 
 	public void setPersonId(Integer personId) {
 		this.personId = personId;
-	}
+	}*/
 
 	public long getLocatorId() {
 		return locatorId;
