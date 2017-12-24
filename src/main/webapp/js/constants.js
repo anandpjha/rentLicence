@@ -1,16 +1,12 @@
 angular.module('constants', [])
 .constant('urls', (function() { 
-	// Define your variable
-	 //var DOMAIN = 'http://localhost:8080/rentlicence/api/v1';
-	 //var DOMAIN = 'http://rentagreement-builderhub.rhcloud.com/api/v1';
-	 //var DOMAIN = 'https://localhost:8443/rentlicence/api/v1';
-	var DOMAIN = 'http://localhost:8080/rentagreement-1.0/api/v1';
-	 //var DOMAIN_UI = 'http://agreementui-builderhub.rhcloud.com/'
-	 //var DOMAIN_UI = 'https://localhost:8443/rentlicence/';
-	var DOMAIN_UI = 'http://localhost:8080/rentagreement-1.0/';
-	//var DOMAIN_UI = 'http://localhost:8080/rentagreement/gui/';
-	//var DOMAIN_UI = 'http://rentagreement-builderhub.rhcloud.com/gui/';
-	  
+	//var DOMAIN = 'http://localhost:8080/rentagreement-1.0/api/v1';
+	//var DOMAIN_UI = 'http://localhost:8080/rentagreement-1.0/';
+
+	var DOMAIN = 'http://http://ec2-54-202-208-228.us-west-2.compute.amazonaws.com/rentagreement-1.0/api/v1';
+    var DOMAIN_UI = 'http://http://ec2-54-202-208-228.us-west-2.compute.amazonaws.com/rentagreement-1.0/';
+
+
 	
   // Use the variable in your constants
 	return {
